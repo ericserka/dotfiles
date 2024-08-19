@@ -10,7 +10,6 @@ require "nvim-treesitter.configs".setup {
     "heex",
     "surface",
     "json",
-    "haskell",
     "bash",
     "yaml",
     "terraform",

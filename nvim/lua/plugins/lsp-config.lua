@@ -5,7 +5,6 @@ local lsp_clients = {
   'lua_ls',
   'elixirls',
   'jsonls',
-  'hls',
   'bashls',
   'yamlls',
   'terraformls',
@@ -34,8 +33,7 @@ require('gitsigns').setup()
 
 local on_attach = function(client, bufnr)
   -- Format on save if documentFormattingProvider
-  -- not formatting when filetype is haskell because unexpected behavior was occurring (maybe due to the ihp framework?)
-  if client.server_capabilities.documentFormattingProvider and vim.bo.filetype ~= "haskell" then
+  if client.server_capabilities.documentFormattingProvider then
     vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.format()')
   end
 
