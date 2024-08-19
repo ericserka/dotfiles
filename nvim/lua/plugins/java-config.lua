@@ -1,0 +1,5 @@
+vim.keymap.set("n", "<leader>tc", "<Cmd>lua require('java').test.run_current_class()<CR>", {})
+vim.keymap.set("n", "<leader>tm", "<Cmd>lua require('java').test.run_current_method()<CR>", {})
+vim.keymap.set("n", "<leader>ev", "<Cmd>lua require('java').refactor.extract_variable()<CR>", {})
+vim.keymap.set("n", "<leader>ec", "<Cmd>lua require('java').refactor.extract_constant()<CR>", {})
+vim.keymap.set("n", "<leader>em", "<Cmd>lua require('java').refactor.extract_method()<CR>", {})
