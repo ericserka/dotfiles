@@ -9,7 +9,7 @@ local config = wezterm.config_builder()
 config.font = wezterm.font("Fira Code Nerd Font Mono")
 
 -- For example, changing the color scheme:
-config.color_scheme = "tokyonight"
+config.color_scheme = "onedark"
 
 -- and finally, return the configuration to wezterm
 return config
