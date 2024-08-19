@@ -1,14 +1,17 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 
--- This will hold the configuration.
+local mux = wezterm.mux
+
+wezterm.on("gui-startup", function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
+
 local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 
 config.font = wezterm.font("Fira Code Nerd Font Mono")
-
--- For example, changing the color scheme:
 config.color_scheme = "onedark"
 
 -- and finally, return the configuration to wezterm
