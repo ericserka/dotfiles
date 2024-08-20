@@ -22,7 +22,9 @@ require "nvim-treesitter.configs".setup {
     "javascript",
     "typescript",
     "typst",
-    "java"
+    "java",
+    "regex",
+    "markdown_inline"
   },
   context_commentstring = {
     enable = true

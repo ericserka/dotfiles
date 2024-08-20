@@ -31,7 +31,7 @@ vim.o.previewheight = 20
 -- Performance/Stability related
 vim.opt.termguicolors = true
 vim.o.swapfile = false
-vim.o.lazyredraw = true
+vim.o.lazyredraw = false
 vim.o.updatetime = 100
 
 -- Other preferences
