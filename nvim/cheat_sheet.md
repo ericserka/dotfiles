@@ -244,6 +244,9 @@ A Git wrapper for Vim.
     - `<CR>` opens the file
     - `dv` see the file diff with a vertical separation
     - `dd` see the file diff with a horizontal separation
+    - Inside the diff window:
+        - `[c` (prev) and `]c` (next) navigate between changes
+    - `dq` Close all but the currently focused diff buffer, and invoke `:diffoff`
     - `s` stage the file
     - `u` unstage the file
     - `-` it's a toggle (either goes back to unstaged or puts it to staged, depending on the current state)
@@ -269,7 +272,7 @@ Git decorations/integration for buffers.
 
 - `<leader>hp` shows the diff on the line where the cursor is (inline diff)
 - `<leader>hb` shows the blame of the line the cursor is on
-
+- `[c` (prev) and `]c` (next) navigate between changes in the file (if any)
 
 ### nvim-lspconfig
 
