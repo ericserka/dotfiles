@@ -7,6 +7,9 @@ require("noice").setup({
       ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
     },
   },
+  messages = {
+    view_search = false
+  },
   -- you can enable a preset for easier configuration
   presets = {
     bottom_search = true,         -- use a classic bottom cmdline for search
@@ -17,4 +20,18 @@ require("noice").setup({
   },
 })
 
-vim.keymap.set("n", "<leader>nh", ":Noice<CR>", {})
+vim.keymap.set("n", "<leader>nh", function()
+  require("noice").cmd("history")
+end)
+
+vim.keymap.set("n", "<leader>nl", function()
+  require("noice").cmd("last")
+end)
+
+vim.keymap.set("n", "<leader>nd", function()
+  require("noice").cmd("dismiss")
+end)
+
+vim.keymap.set("n", "<leader>ne", function()
+  require("noice").cmd("errors")
+end)
