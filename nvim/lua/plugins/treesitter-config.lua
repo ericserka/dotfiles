@@ -24,7 +24,9 @@ require "nvim-treesitter.configs".setup {
     "typst",
     "java",
     "regex",
-    "markdown_inline"
+    "markdown_inline",
+    "css",
+    "scss"
   },
   context_commentstring = {
     enable = true

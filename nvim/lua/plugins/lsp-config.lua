@@ -16,7 +16,11 @@ local lsp_clients = {
   'marksman',
   'tsserver',
   'typst_lsp',
-  'jdtls'
+  'jdtls',
+  'tailwindcss',
+  'css_variables',
+  'cssls',
+  'cssmodules_ls'
 }
 
 require('mason').setup()
@@ -108,4 +112,24 @@ require('mason-lspconfig').setup_handlers {
       capabilities
     }
   end
+}
+
+require 'lspconfig'.cssls.setup {
+  settings = {
+    css = { validate = true,
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    },
+    scss = { validate = true,
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    },
+    less = { validate = true,
+      lint = {
+        unknownAtRules = "ignore"
+      }
+    },
+  }
 }
