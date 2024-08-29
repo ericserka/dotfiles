@@ -137,7 +137,11 @@ of: `:s/Copyright 2007 All Rights Reserved/Copyright 2008 All Rights Reserved/` 
 - `<leader>tr` is a remap for `:%s///g` and opens the command line with the search and replace command
 - To search in vim, just type `/` and then the word you want to search
 - To move between occurrences, press `n` (next) or `N` (prev)
-- To search for the word under the cursor, press `*` 
+- Shortcuts to search for the word under the cursor:
+    - `*`: searches for the exact word (uses word delimiters) forward in the file
+    - `#`: similar to `*`, but searches backward in the file
+    - `g*`: searches for the word forward in the file and without word delimiters (partial matches)
+    - `g#`: similar to `g*`, but searches backward in the file
 - Examples of search:
     - `/\cword` case insensitive search without matching the entire word (that is, `word_world` would also appear as a result) (equivalent to /word)
     - `/\Cword` case sensitive search without matching the entire word
