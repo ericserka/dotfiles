@@ -20,7 +20,10 @@ local lsp_clients = {
   'tailwindcss',
   'css_variables',
   'cssls',
-  'cssmodules_ls'
+  'cssmodules_ls',
+  'ruff',
+  'ruff_lsp',
+  'angularls'
 }
 
 require('mason').setup()

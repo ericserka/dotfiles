@@ -26,7 +26,9 @@ require "nvim-treesitter.configs".setup {
     "regex",
     "markdown_inline",
     "css",
-    "scss"
+    "scss",
+    "python",
+    "angular"
   },
   context_commentstring = {
     enable = true
