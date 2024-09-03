@@ -23,7 +23,8 @@ local lsp_clients = {
   'cssmodules_ls',
   'ruff',
   'ruff_lsp',
-  'angularls'
+  'angularls',
+  'html'
 }
 
 require('mason').setup()
