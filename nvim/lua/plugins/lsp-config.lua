@@ -14,7 +14,7 @@ local lsp_clients = {
   'earthlyls',
   'taplo',
   'marksman',
-  'tsserver',
+  'ts_ls',
   'typst_lsp',
   'jdtls',
   'tailwindcss',
