@@ -29,7 +29,8 @@ require "nvim-treesitter.configs".setup {
     "scss",
     "python",
     "angular",
-    "html"
+    "html",
+    "ledger"
   },
   context_commentstring = {
     enable = true
