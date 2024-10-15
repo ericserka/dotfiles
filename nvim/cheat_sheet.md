@@ -315,6 +315,8 @@ A file explorer tree for neovim.
 - `W` collapse (close all the trees)
 - `Y` copies the relative path
 - `gy` copies the absolute path
+- `H` Toggle Filter: Dotfiles
+- `I` Toggle Filter: Git Ignore
 - `g?` shows all mappings available
 
 ### markdown-preview
