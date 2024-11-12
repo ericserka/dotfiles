@@ -68,6 +68,7 @@ The Normal mode is the default mode when launching Vim. It is the one you'll spe
 - `ca<character>` changes the text inside the `<character>` and the `<character>` (e.g. `ca"` changes the text inside the quotes and the quotes)
 - `da<character>` deletes the text inside the `<character>` and the `<character>` (e.g. `da"` deletes the text inside the quotes and the quotes)
 - `ya<character>` copies the text inside the `<character>` and the `<character>` (e.g. `ya"` copies the text inside the quotes and the quotes)
+- `gx` open link under cursor in browser
 
 ### Visual mode
 
@@ -80,6 +81,7 @@ The Visual mode allows you to visually highlight (select) specific text areas an
 - `j` moves the cursor down
 - `k` moves the cursor up
 - `l` moves the cursor to the right
+- `gx` open selected link in browser
 
 ### Command mode
 
