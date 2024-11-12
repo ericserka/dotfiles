@@ -30,7 +30,8 @@ require "nvim-treesitter.configs".setup {
     "python",
     "angular",
     "html",
-    "ledger"
+    "ledger",
+    "tsv"
   },
   context_commentstring = {
     enable = true
