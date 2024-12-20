@@ -24,7 +24,8 @@ local lsp_clients = {
   'ruff',
   'ruff_lsp',
   'angularls',
-  'html'
+  'html',
+  'prismals'
 }
 
 require('mason').setup()
