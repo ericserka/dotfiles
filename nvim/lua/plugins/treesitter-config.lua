@@ -31,7 +31,9 @@ require "nvim-treesitter.configs".setup {
     "angular",
     "html",
     "ledger",
-    "prisma"
+    "tsv",
+    "prisma",
+    "diff"
   },
   context_commentstring = {
     enable = true
