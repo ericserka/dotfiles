@@ -45,8 +45,8 @@ require("lazy").setup(
       "akinsho/toggleterm.nvim",
       version = "*",
       config = true
-    },                               -- Persistent terminal (<C-d> to exit without persist)
-    { "nvim-lualine/lualine.nvim" }, -- Statusline
+    },                                                                                 -- Persistent terminal (<C-d> to exit without persist)
+    { "nvim-lualine/lualine.nvim",          dependencies = { 'nvim-tree/nvim-web-devicons' } }, -- Statusline
     -- Editor actions
     { "nvim-telescope/telescope.nvim",      tag = "0.1.5" },
     { "nvim-pack/nvim-spectre" },
