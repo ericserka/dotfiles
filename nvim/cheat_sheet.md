@@ -295,6 +295,12 @@ Easily install and manage LSP servers, DAP servers, linters, and formatters.
 
 - `:Mason` opens the language servers installation UI (`i` installs certain ls).
 
+### nvim-treesitter
+
+A plugin that provides a parser generator tool and an incremental parsing library for Vim.
+
+- `TSUpdate all` updates all parsers.
+
 ### commentary
 
 A plugin that allows you to comment out code easily.
