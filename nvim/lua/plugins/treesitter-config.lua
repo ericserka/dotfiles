@@ -33,7 +33,8 @@ require "nvim-treesitter.configs".setup {
     "ledger",
     "tsv",
     "prisma",
-    "diff"
+    "diff",
+    "tsx"
   },
   context_commentstring = {
     enable = true
