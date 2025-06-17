@@ -45,7 +45,7 @@ require("lazy").setup(
       "akinsho/toggleterm.nvim",
       version = "*",
       config = true
-    },                                                                                 -- Persistent terminal (<C-d> to exit without persist)
+    },                                                                                          -- Persistent terminal (<C-d> to exit without persist)
     { "nvim-lualine/lualine.nvim",          dependencies = { 'nvim-tree/nvim-web-devicons' } }, -- Statusline
     -- Editor actions
     { "nvim-telescope/telescope.nvim",      tag = "0.1.5" },
@@ -60,12 +60,9 @@ require("lazy").setup(
     -- Language specific
     { "elixir-editors/vim-elixir" },
     {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      ft = { "markdown" },
-      build = function()
-        vim.fn["mkdp#util#install"]()
-      end
+      "MeanderingProgrammer/render-markdown.nvim",
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      opts = {},
     },
     {
       "theKnightsOfRohan/csvlens.nvim",

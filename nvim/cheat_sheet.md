@@ -327,12 +327,6 @@ A file explorer tree for neovim.
 - `I` Toggle Filter: Git Ignore
 - `g?` shows all mappings available
 
-### markdown-preview
-
-A markdown previewer for neovim.
-
-- `<leader>m` executes the command `:MarkdownPreviewToggle`, that is, opens (or closes) the markdown preview
-
 ### csvlens
 
 A plugin that allows you to view CSV files through [csvlens](https://github.com/YS-L/csvlens).
