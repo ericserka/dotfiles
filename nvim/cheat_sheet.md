@@ -277,7 +277,12 @@ A Git wrapper for Vim.
 Git decorations/integration for buffers.
 
 - `<leader>hp` shows the diff on the line where the cursor is (inline diff)
+- `<leader>hi` preview the hunk at the cursor position inline in the buffer
 - `<leader>hb` shows the blame of the line the cursor is on
+- `<leader>hs` stage the hunk at the cursor position
+- `<leader>hS` stage all hunks in current buffer
+- `<leader>hu` reset the lines of the hunk at the cursor position
+- `<leader>hU` reset the lines of all hunks in the buffer
 - `[c` (prev) and `]c` (next) navigate between changes in the file (if any)
 
 ### nvim-lspconfig
@@ -288,6 +293,7 @@ A collection of common configurations for the Nvim LSP client.
 - `gd` or `CTRL-LeftMouse` goes to the definition of the word under the cursor
 - `K` shows the documentation of the word under the cursor (hover)
 - `CTRL-x` shows error diagnostics
+- List of all LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     
 ### Mason
 
