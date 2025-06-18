@@ -81,7 +81,8 @@ cmp.setup {
 }
 
 -- setup nvim-java before lspconfig
-require('java').setup()
+-- removing java setup temporarily
+-- require('java').setup()
 
 vim.lsp.config("*", {
   on_attach = on_attach,
