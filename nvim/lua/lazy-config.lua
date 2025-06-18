@@ -20,11 +20,47 @@ require("lazy").setup(
   {
     -- Theme
     { "navarasu/onedark.nvim" },
-    { "nvim-tree/nvim-web-devicons",      lazy = false },
-    { "nvim-lua/plenary.nvim",            lazy = false },
+    { "nvim-tree/nvim-web-devicons", lazy = false },
+    { "nvim-lua/plenary.nvim",       lazy = false },
     -- LSP
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
+    {
+      "mason-org/mason.nvim",
+      opts = {}
+    },
+    {
+      "mason-org/mason-lspconfig.nvim",
+      opts = {
+        ensure_installed = {
+          'lua_ls',
+          'elixirls',
+          'jsonls',
+          'bashls',
+          'yamlls',
+          'terraformls',
+          'sqls',
+          'dockerls',
+          'docker_compose_language_service',
+          'earthlyls',
+          'taplo',
+          'marksman',
+          'ts_ls',
+          'tinymist',
+          'jdtls',
+          'tailwindcss',
+          'css_variables',
+          'cssls',
+          'cssmodules_ls',
+          'ruff',
+          'angularls',
+          'html',
+          'prismals'
+        }
+      },
+      dependencies = {
+        { "mason-org/mason.nvim", opts = {} },
+        "neovim/nvim-lspconfig",
+      },
+    },
     { "neovim/nvim-lspconfig" },
     {
       "hrsh7th/nvim-cmp",

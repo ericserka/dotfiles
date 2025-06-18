@@ -1,35 +1,3 @@
--- LSP client installer
--- Languages required for lsp_clients listed below: nodejs, golang and python (recommended to install using asdf)
--- unzip is a prerequisite for some too (sudo apt install unzip)
-local lsp_clients = {
-  'lua_ls',
-  'elixirls',
-  'jsonls',
-  'bashls',
-  'yamlls',
-  'terraformls',
-  'sqls',
-  'dockerls',
-  'docker_compose_language_service',
-  'earthlyls',
-  'taplo',
-  'marksman',
-  'ts_ls',
-  'tinymist',
-  'jdtls',
-  'tailwindcss',
-  'css_variables',
-  'cssls',
-  'cssmodules_ls',
-  'ruff',
-  'angularls',
-  'html',
-  'prismals'
-}
-
-require('mason').setup()
-require('mason-lspconfig').setup({ ensure_installed = lsp_clients })
-
 -- Autocompletion
 local cmp = require('cmp')
 
@@ -54,6 +22,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.keymap.set('n', '<leader>cs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.keymap.set('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.keymap.set('n', '<leader>jd', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.keymap.set('n', '<leader>jn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  vim.keymap.set('n', '<leader>jp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  vim.keymap.set('n', '<leader>ch',
+    '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })<CR>', opts)
 
   -- Gitsigns
   local gs = package.loaded.gitsigns
@@ -85,7 +60,6 @@ local on_attach = function(client, bufnr)
   map('n', '<leader>hu', gs.reset_hunk)
   map('n', '<leader>hU', gs.reset_buffer)
   map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-  map('n', '<leader>hd', gs.toggle_deleted)
 end
 
 
@@ -109,31 +83,7 @@ cmp.setup {
 -- setup nvim-java before lspconfig
 require('java').setup()
 
-require('mason-lspconfig').setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      on_attach = on_attach,
-      capabilities
-    }
-  end
-}
-
-require 'lspconfig'.cssls.setup {
-  settings = {
-    css = { validate = true,
-      lint = {
-        unknownAtRules = "ignore"
-      }
-    },
-    scss = { validate = true,
-      lint = {
-        unknownAtRules = "ignore"
-      }
-    },
-    less = { validate = true,
-      lint = {
-        unknownAtRules = "ignore"
-      }
-    },
-  }
-}
+vim.lsp.config("*", {
+  on_attach = on_attach,
+  capabilities
+})
