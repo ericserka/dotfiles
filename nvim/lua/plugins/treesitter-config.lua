@@ -34,7 +34,8 @@ require "nvim-treesitter.configs".setup {
     "tsv",
     "prisma",
     "diff",
-    "tsx"
+    "tsx",
+    "po"
   },
   context_commentstring = {
     enable = true
