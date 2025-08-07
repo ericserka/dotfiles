@@ -82,6 +82,7 @@ The Visual mode allows you to visually highlight (select) specific text areas an
 - `k` moves the cursor up
 - `l` moves the cursor to the right
 - `gx` open selected link in browser
+- `o` moves the cursor to the other end of the selection
 
 ### Command mode
 
