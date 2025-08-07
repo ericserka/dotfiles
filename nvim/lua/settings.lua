@@ -44,3 +44,26 @@ vim.o.scrolloff = 10
 vim.o.errorbells = false
 vim.o.numberwidth = 4
 vim.o.clipboard = "unnamedplus" -- Synchronizes the system clipboard with Neovim's clipboard
+
+-- Tabs
+function _G.my_tabline()
+  local s = ''
+
+  for i = 1, vim.fn.tabpagenr('$') do
+    local winnr = vim.fn.tabpagewinnr(i)
+    local bufnr = vim.fn.tabpagebuflist(i)[winnr]
+    local filename = vim.fn.fnamemodify(vim.fn.bufname(bufnr), ':t')
+
+    if filename == '' then filename = '[No Name]' end
+
+    -- Current tab is highlighted
+    local hl = i == vim.fn.tabpagenr() and '%#TabLineSel#' or '%#TabLine#'
+
+    -- Format: number:name
+    s = s .. hl .. ' ' .. i .. ':' .. filename .. ' '
+  end
+
+  return s .. '%#TabLineFill#%T'
+end
+
+vim.opt.tabline = '%!v:lua.my_tabline()'
