@@ -100,6 +100,7 @@ The Normal mode is the default mode when launching Vim. It is the one you'll spe
 - `<leader>tmh` moves the current tab to the left
 - `<leader>tmb` moves the current tab to the first position
 - `<leader>tme` moves the current tab to the last position
+- `<leader>pp` open image preview
 
 ### Visual mode
 
