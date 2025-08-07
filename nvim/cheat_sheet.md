@@ -100,6 +100,7 @@ The Command-line mode offers a more advanced way of executing commands that are 
 - `:h keyword` open help for keyword. This keyword can be an option or a command, for example.
 - `:n` go to line `n` of the current file
 - Vim automatically appends the visual selection range `'<,'>` for any command when you select an area and enter `:`
+- `:tabnew` opens a new tab
 
 #### Search and replace
 
