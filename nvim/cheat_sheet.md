@@ -69,6 +69,36 @@ The Normal mode is the default mode when launching Vim. It is the one you'll spe
 - `da<character>` deletes the text inside the `<character>` and the `<character>` (e.g. `da"` deletes the text inside the quotes and the quotes)
 - `ya<character>` copies the text inside the `<character>` and the `<character>` (e.g. `ya"` copies the text inside the quotes and the quotes)
 - `gx` open link under cursor in browser
+- `f<character>` moves the cursor to the next occurrence of `<character>` in the line
+- `F<character>` moves the cursor to the previous occurrence of `<character>` in the line
+- `t<character>` moves the cursor to the next occurrence of `<character>` in the line, but stops before it
+- `T<character>` moves the cursor to the previous occurrence of `<character>` in the line, but stops before it
+- `;` repeats the last `f`, `F`, `t` or `T` command
+- `,` repeats the last `f`, `F`, `t` or `T` command in the opposite direction
+- `% (shift 5)` moves the cursor to the matching parenthesis, bracket or brace
+- `gv` reselects the last visual selection
+- `'.` moves the cursor to the last edition
+- `g;` return the cursor to previous editions
+- `g,` advance the cursor to next editions
+- `zz` redraws the screen with the current line at the center
+- `gf` opens the file under the cursor
+- `dt<character>` deletes the text from the cursor to the next occurrence of `<character>` in the line
+- `ct<character>` deletes the text from the cursor to the next occurrence of `<character>` in the line and enters insert mode
+- `yt<character>` copies the text from the cursor to the next occurrence of `<character>` in the line
+- `vt<character>` visually selects the text from the cursor to the next occurrence of `<character>` in the line
+- `.` is used to repeat the last command executed
+- `gt` goes to the next tab
+- `gT` goes to the previous tab
+- `<leader>tn` opens a new tab
+- `<leader>tq` closes the current tab
+- `<leader>tl` goes to the next tab
+- `<leader>th` goes to the previous tab
+- `<leader>t<1-8>` goes to the tab with the number `<1-8>`
+- `<leader>t9` goes to the last tab
+- `<leader>tml` moves the current tab to the right
+- `<leader>tmh` moves the current tab to the left
+- `<leader>tmb` moves the current tab to the first position
+- `<leader>tme` moves the current tab to the last position
 
 ### Visual mode
 
