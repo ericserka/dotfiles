@@ -20,6 +20,64 @@ vim.api.nvim_set_keymap('n', '<leader>rl', ':luafile %<CR>', { noremap = true, s
 -- [ K ]ill [ A ]ll [ B ]uffers
 vim.api.nvim_set_keymap('n', '<leader>kab', ':%bd|e#<CR>', { noremap = true, silent = true })
 
+-- Tabs
+
+vim.keymap.set('n', '<leader>tn', function()
+  vim.cmd('tabnew')
+end, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>tl', function()
+  vim.cmd('tabnext')
+end, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>th', function()
+  vim.cmd('tabprev')
+end, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>tq', function()
+  vim.cmd('tabclose')
+end, { noremap = true, silent = true })
+
+for i = 1, 8 do
+  vim.keymap.set('n', '<leader>t' .. i, i .. 'gt', { noremap = true, silent = true })
+end
+
+vim.keymap.set('n', '<leader>t9', function()
+  vim.cmd('tablast')
+end, { noremap = true, silent = true })
+
+local function move_tab_left_circular()
+  local current = vim.fn.tabpagenr()
+  if current > 1 then
+    vim.cmd('tabmove -1')
+  else
+    vim.cmd('tabmove $')
+  end
+end
+
+local function move_tab_right_circular()
+  local current = vim.fn.tabpagenr()
+  local total = vim.fn.tabpagenr('$')
+  if current < total then
+    vim.cmd('tabmove +1')
+  else
+    vim.cmd('tabmove 0')
+  end
+end
+
+vim.keymap.set('n', '<leader>tml', move_tab_right_circular, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>tmh', move_tab_left_circular, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>tmb', function()
+  vim.cmd('tabmove 0')
+end, { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>tme', function()
+  vim.cmd('tabmove $')
+end, { noremap = true, silent = true })
+
+
 ------------------------------------
 ------ Non mneumonical remaps ------
 ------------------------------------
