@@ -91,6 +91,7 @@ The Normal mode is the default mode when launching Vim. It is the one you'll spe
 - `gT` goes to the previous tab
 - `<leader>tn` opens a new tab
 - `<leader>tq` closes the current tab
+- `<leader>to` closes all tabs except the current one
 - `<leader>tl` goes to the next tab
 - `<leader>th` goes to the previous tab
 - `<leader>t<1-8>` goes to the tab with the number `<1-8>`

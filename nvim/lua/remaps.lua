@@ -38,6 +38,10 @@ vim.keymap.set('n', '<leader>tq', function()
   vim.cmd('tabclose')
 end, { noremap = true, silent = true })
 
+vim.keymap.set('n', '<leader>to', function()
+  vim.cmd('tabonly')
+end, { noremap = true, silent = true })
+
 for i = 1, 8 do
   vim.keymap.set('n', '<leader>t' .. i, i .. 'gt', { noremap = true, silent = true })
 end
