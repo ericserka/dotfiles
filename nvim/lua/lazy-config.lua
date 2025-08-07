@@ -68,9 +68,9 @@ require("lazy").setup(
     },
     { "nvim-treesitter/nvim-treesitter" },
     -- Editor tools
-    { "kyazdani42/nvim-tree.lua",       lazy = false }, -- File tree
-    { "tpope/vim-fugitive" },                           -- Git interface
-    { "lewis6991/gitsigns.nvim" },                      -- Git utilities
+    { "nvim-tree/nvim-tree.lua",        lazy = false }, -- File tree
+    { "tpope/vim-fugitive" },                          -- Git interface
+    { "lewis6991/gitsigns.nvim" },                     -- Git utilities
     {
       "akinsho/git-conflict.nvim",
       version = "*",
@@ -113,6 +113,13 @@ require("lazy").setup(
       "folke/noice.nvim",
       event = "VeryLazy",
       dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify", }
+    },
+    {
+      'adelarsq/image_preview.nvim',
+      event = 'VeryLazy',
+      config = function()
+        require("image_preview").setup()
+      end
     }
   }
 )
