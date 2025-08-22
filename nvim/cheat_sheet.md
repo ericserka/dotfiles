@@ -211,6 +211,17 @@ Recommended to use the lua programming language, although I think there are othe
 3. inside the `~/.config/nvim/lua/plugins` folder, create lua plugin configuration files
     1. If the plugin doesn't need additional configuration, just put your require inside the `_other-plugin-requires.lua` file
 
+### Macros - Powerful Automation
+
+Macros are like recording a video of your commands:
+
+1. Start recording a macro by pressing `q` followed by a letter (e.g., `qa` to record into register `a`)
+2. Perform the actions you want to record
+3. Stop recording by pressing `q` again
+4. To play the macro, press `@` followed by the letter you used to record it (e.g., `@a`)
+5. You can repeat the macro multiple times by pressing `@@` or `n@a` (where `n` is the number of times you want to repeat it)
+6. `@@` plays the last executed macro again
+
 ## Plugins
 
 ### toggleterm
