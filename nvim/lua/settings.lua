@@ -67,3 +67,6 @@ function _G.my_tabline()
 end
 
 vim.opt.tabline = '%!v:lua.my_tabline()'
+
+-- Cursor line highlighting
+vim.opt.cursorline = true
