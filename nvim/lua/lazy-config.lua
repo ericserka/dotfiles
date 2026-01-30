@@ -85,7 +85,7 @@ require("lazy").setup(
     },                                                                                          -- Persistent terminal (<C-d> to exit without persist)
     { "nvim-lualine/lualine.nvim",          dependencies = { 'nvim-tree/nvim-web-devicons' } }, -- Statusline
     -- Editor actions
-    { "nvim-telescope/telescope.nvim",      tag = "0.1.5" },
+    { "nvim-telescope/telescope.nvim" },
     { "nvim-pack/nvim-spectre" },
     { "tpope/vim-commentary" },
     { "tpope/vim-surround" },
