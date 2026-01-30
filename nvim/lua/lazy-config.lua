@@ -70,8 +70,8 @@ require("lazy").setup(
     { "nvim-treesitter/nvim-treesitter" },
     -- Editor tools
     { "nvim-tree/nvim-tree.lua",        lazy = false }, -- File tree
-    { "tpope/vim-fugitive" },                          -- Git interface
-    { "lewis6991/gitsigns.nvim" },                     -- Git utilities
+    { "tpope/vim-fugitive" },                           -- Git interface
+    { "lewis6991/gitsigns.nvim" },                      -- Git utilities
     {
       "akinsho/git-conflict.nvim",
       version = "*",
