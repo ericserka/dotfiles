@@ -32,7 +32,7 @@ require("lazy").setup(
       opts = {
         ensure_installed = {
           'lua_ls',
-          'elixirls',
+          'expert',
           'jsonls',
           'bashls',
           'yamlls',
