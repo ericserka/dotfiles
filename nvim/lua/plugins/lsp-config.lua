@@ -9,7 +9,7 @@ require('gitsigns').setup()
 
 local on_attach = function(client, bufnr)
   -- Format on save if documentFormattingProvider
-  if client.server_capabilities.documentFormattingProvider then
+  if client.server_capabilities.documentFormattingProvider and vim.bo.filetype ~= "sql" then
     vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.format()')
   end
 
