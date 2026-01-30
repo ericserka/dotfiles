@@ -53,7 +53,8 @@ require("lazy").setup(
           'ruff',
           'angularls',
           'html',
-          'prismals'
+          'prismals',
+          'nim_langserver'
         }
       },
       dependencies = {

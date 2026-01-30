@@ -35,7 +35,8 @@ require "nvim-treesitter.configs".setup {
     "prisma",
     "diff",
     "tsx",
-    "po"
+    "po",
+    "nim"
   },
   context_commentstring = {
     enable = true
