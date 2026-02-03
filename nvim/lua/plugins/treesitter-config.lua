@@ -1,11 +1,15 @@
-require "nvim-treesitter.configs".setup {
-  -- the first five should always be installed
-  ensure_installed = {
-    "c",
-    "lua",
-    "vim",
-    "vimdoc",
-    "query",
+require "nvim-treesitter".setup {
+  highlight = {
+    enable = true
+  },
+  indent = {
+    enable = true
+  }
+}
+-- c, lua, vim, vimdoc, query, markdown, markdown_inline are bundled with
+-- Neovim 0.11+. Installing them via nvim-treesitter can cause parser/query
+-- version mismatches.
+require "nvim-treesitter".install {
     "elixir",
     "heex",
     "surface",
@@ -18,13 +22,11 @@ require "nvim-treesitter.configs".setup {
     "dockerfile",
     "toml",
     "csv",
-    "markdown",
     "javascript",
     "typescript",
     "typst",
     "java",
     "regex",
-    "markdown_inline",
     "css",
     "scss",
     "python",
@@ -37,17 +39,4 @@ require "nvim-treesitter.configs".setup {
     "tsx",
     "po",
     "nim"
-  },
-  context_commentstring = {
-    enable = true
-  },
-  highlight = {
-    enable = true
-  },
-  indent = {
-    enable = true
-  },
-  playground = {
-    enable = true
-  }
 }
