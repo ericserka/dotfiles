@@ -1,4 +1,13 @@
 require("noice").setup({
+  routes = {
+    {
+      filter = {
+        event = "msg_show",
+        find = "nvim%-treesitter/install",
+      },
+      opts = { skip = true },
+    },
+  },
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
     override = {
