@@ -1,0 +1,23 @@
+# Colors
+color=3c3c5c
+inside-color=1e1e2e
+ring-color=404060
+key-hl-color=8ec07c
+bs-hl-color=fb4934
+line-color=00000000
+text-color=c0c0c0
+
+# Wrong password
+inside-wrong-color=fb4934
+ring-wrong-color=cc241d
+text-wrong-color=1d2021
+
+# Verifying
+inside-ver-color=83a598
+ring-ver-color=458588
+text-ver-color=1d2021
+
+# Behavior
+ignore-empty-password
+show-failed-attempts
+daemonize
