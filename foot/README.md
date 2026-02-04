@@ -1,0 +1,3 @@
+# foot
+
+Fast, lightweight and minimalistic Wayland terminal emulator.
