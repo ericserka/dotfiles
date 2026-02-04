@@ -67,7 +67,11 @@ require("lazy").setup(
       "hrsh7th/nvim-cmp",
       dependencies = { { "hrsh7th/cmp-nvim-lsp" } }
     },
-    { "nvim-treesitter/nvim-treesitter" },
+    {
+      'nvim-treesitter/nvim-treesitter',
+      lazy = false,
+      build = ':TSUpdate'
+    },
     -- Editor tools
     { "nvim-tree/nvim-tree.lua",        lazy = false }, -- File tree
     { "tpope/vim-fugitive" },                           -- Git interface
