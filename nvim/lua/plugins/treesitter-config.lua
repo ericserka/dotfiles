@@ -1,11 +1,3 @@
-require "nvim-treesitter".setup {
-  highlight = {
-    enable = true
-  },
-  indent = {
-    enable = true
-  }
-}
 -- c, lua, vim, vimdoc, query, markdown, markdown_inline are bundled with
 -- Neovim 0.11+. Installing them via nvim-treesitter can cause parser/query
 -- version mismatches.
@@ -40,3 +32,11 @@ require "nvim-treesitter".install {
     "po",
     "nim"
 }
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    if pcall(vim.treesitter.start) then
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})
