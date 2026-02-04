@@ -99,7 +99,6 @@ require("lazy").setup(
     { "moll/vim-bbye" },
     { "github/copilot.vim" },
     -- Language specific
-    { "elixir-editors/vim-elixir" },
     {
       "MeanderingProgrammer/render-markdown.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
