@@ -1,0 +1,21 @@
+# the order matters; more specific scenario first; switch if desired
+
+# dual monitor (both on)
+profile dual {
+    output eDP-1 enable scale 1 position 0,0
+    output HDMI-A-1 enable scale 1 position 1920,0
+    exec echo dual > /tmp/kanshi-profile
+}
+
+# home office (only external monitor)
+profile docked {
+    output eDP-1 disable
+    output HDMI-A-1 enable scale 1 position 0,0
+    exec echo docked > /tmp/kanshi-profile
+}
+
+# notebook only (away from home)
+profile notebook {
+    output eDP-1 enable scale 1 position 0,0
+    exec echo notebook > /tmp/kanshi-profile
+}
