@@ -1,0 +1,144 @@
+/* ========== GENERAL ========== */
+
+* {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: rgba(30, 30, 40, 0.95);
+  color: #c0c0c0;
+}
+
+/* ========== MODULES ========== */
+
+#workspaces,
+#mode,
+#window,
+#clock,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#pulseaudio,
+#network,
+#battery,
+#tray {
+  padding: 0 10px;
+  margin: 4px 2px;
+  background-color: rgba(50, 50, 60, 0.8);
+  border-radius: 4px;
+}
+
+/* ========== WORKSPACES ========== */
+
+#workspaces button {
+  padding: 0 8px;
+  color: #808080;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+}
+
+#workspaces button:hover {
+  background-color: rgba(100, 100, 120, 0.5);
+}
+
+#workspaces button.focused {
+  color: #ffffff;
+  background-color: rgba(80, 80, 100, 0.8);
+}
+
+#workspaces button.urgent {
+  color: #ff6699;
+}
+
+/* ========== CLOCK ========== */
+
+#clock {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* ========== SYSTEM RESOURCES ========== */
+
+#cpu {
+  color: #8ec07c;
+}
+
+#memory {
+  color: #83a598;
+}
+
+#temperature {
+  color: #b8bb26;
+}
+
+#temperature.critical {
+  color: #fb4934;
+}
+
+/* ========== BRIGHTNESS AND VOLUME ========== */
+
+#backlight {
+  color: #fabd2f;
+}
+
+#pulseaudio {
+  color: #d3869b;
+}
+
+#pulseaudio.muted {
+  color: #665c54;
+}
+
+/* ========== NETWORK ========== */
+
+#network {
+  color: #8ec07c;
+}
+
+#network.disconnected {
+  color: #fb4934;
+}
+
+/* ========== BATTERY ========== */
+
+#battery {
+  color: #98971a;
+}
+
+#battery.charging {
+  color: #b8bb26;
+}
+
+#battery.warning:not(.charging) {
+  color: #fabd2f;
+}
+
+#battery.critical:not(.charging) {
+  color: #fb4934;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  to {
+    color: #1d2021;
+    background-color: #fb4934;
+  }
+}
+
+/* ========== TRAY ========== */
+
+#tray {
+  background-color: transparent;
+}
+
+#tray>.passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+}

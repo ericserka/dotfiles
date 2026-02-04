@@ -1,0 +1,3 @@
+# waybar
+
+Highly customizable Wayland bar for Sway and Wlroots based compositors.
