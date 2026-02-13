@@ -244,6 +244,8 @@ bindsym $mod+Shift+p exec swaynag -t warning -m 'Power Menu' \
     -B 'Suspend' 'systemctl suspend' \
     -B 'Logout' 'swaymsg exit'
 
+bindsym $mod+F4 exec systemctl poweroff
+
 # ========== AUTO-LOCK ON IDLE ==========
 
 exec swayidle -w \
