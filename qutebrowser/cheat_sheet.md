@@ -13,22 +13,20 @@ command. For example, `3j` will move the cursor down three lines.
 
 ## Accessing urls quickly
 
-- Temos basicamente 2 formas de acessar urls rapidamente, bookmarks e quickmarks.
-- O atalho `Sq` (comando `:bookmark-list`) lista todos os bookmarks e quickmarks salvos. Essa é uma das formas de acessar as urls rapidamente. Você pode executar o comando `:bookmark-list -t` se desejar abrir a listagem em uma nova aba.
-- Nas seções de bookmarks e quickmarks abaixo, existem formas específicas de acessar cada um deles. Porém, uma forma bem prática de acessar ambos é a partir do comando `:open` (atalho `o`) ou `:open -t` (atalho `O`). Basta começar a digitar algo e o qutebrowser vai buscar nos bookmarks e quickmarks automaticamente nas sugestões da barra de URL. 
+- We basically have 2 ways to quickly access URLs: bookmarks and quickmarks.
+- The shortcut `Sq` (command `:bookmark-list`) lists all saved bookmarks and quickmarks. This is one way to quickly access URLs. You can run the command `:bookmark-list -t` if you want to open the list in a new tab.
+- In the bookmarks and quickmarks sections below, there are specific ways to access each one. However, a very practical way to access both is using the command `:open` (shortcut `o`) or `:open -t` (shortcut `O`). Just start typing something and the qutebrowser will automatically search the bookmarks and quickmarks in the URL bar suggestions.
 
 ### Bookmarks
 
-- Bookmarks são urls favoritas que você salva para acessar depois pois utiliza com frequência.
-- Todos os seus bookmarks ficam armazenados no arquivo `~/.config/qutebrowser/bookmarks/urls`.
-- Para salvar o bookmark da página atual, utilize o atalho `M`. Se desejar salvar o bookmark de uma url específica, utilize o comando `:bookmark-add [url] [title]`.
-- Para abrir um bookmark, você pode utilizar o atalho `gb` (comando `:bookmark-load`) ou o atalho
-`gB` (comando `:bookmark-load -t` - nova aba)
+- Bookmarks are favorite URLs that you save to access later because you use them frequently.
+- All your bookmarks are stored in the file `~/.config/qutebrowser/bookmarks/urls`.
+- To save the bookmark of the current page, use the shortcut `M`. If you want to save the bookmark of a specific URL, use the command `:bookmark-add [url] [title]`.
+- To open a bookmark, you can use the shortcut `gb` (command `:bookmark-load`) or the shortcut `gB` (command `:bookmark-load -t` - new tab)
 
 ### Quickmarks
 
-- Quickmarks associam um nome curto a uma URL. São atalhos nomeados. Um pouco diferente dos bookmarks.
-- Todos quickmarks ficam armazenados no arquivo `~/.config/qutebrowser/quickmarks`.
-- Para salvar o quickmark da página atual, utilize o atalho `m` (comando `:quickmark-save`). Se desejar salvar o quickmark de uma url específica, utilize o comando `:quickmark-add [url] [name]`.
-- Para abrir um quickmark, você pode utilizar o atalho `b` (comando `:quickmark-load`) ou o atalho
-`B` (comando `:quickmark-load -t` - nova aba)
+- Quickmarks associate a short name with a URL. They are named shortcuts. A little different from bookmarks.
+- All quickmarks are stored in the file `~/.config/qutebrowser/quickmarks`.
+- To save the quickmark of the current page, use the shortcut `m` (command `:quickmark-save`). If you want to save the quickmark for a specific URL, use the command `:quickmark-add [url] [name]`.
+- To open a quickmark, you can use the shortcut `b` (command `:quickmark-load`) or the shortcut `B` (command `:quickmark-load -t` - new tab).
