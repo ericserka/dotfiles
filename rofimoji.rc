@@ -1,0 +1,5 @@
+selector = wofi
+action = copy
+skin-tone = neutral
+clipboarder = wl-copy
+prompt = "Select an emoji"
