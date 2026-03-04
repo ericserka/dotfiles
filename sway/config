@@ -259,6 +259,29 @@ exec swayidle -w \
     timeout 900 '~/.config/sway/scripts/swayidle-guard.sh systemctl suspend' \
     before-sleep 'swaylock -f'
 
+# ── Clipboard ────────────────────────────────────────────
+# History daemon
+exec ~/.config/sway/scripts/cliphist-daemon.fish
+
+# Sincronize clipboard with primary selection (middle mouse button)
+exec wl-paste --primary --watch wl-copy
+
+# ── Keybindings ───────────────────────────────────
+# Open clipboard history in wofi
+bindsym $mod+Shift+v exec ~/.config/sway/scripts/clipboard-manager.fish pick
+
+# Clear history
+bindsym $mod+ctrl+v  exec ~/.config/sway/scripts/clipboard-manager.fish clear
+
+# Delete specific item from history
+bindsym $mod+alt+v   exec ~/.config/sway/scripts/clipboard-manager.fish delete
+
+# Image preview in clipboard
+bindsym $mod+Shift+i exec ~/.config/sway/scripts/clipboard-preview-image.fish
+
+# Saves the image in clipboard to ~/Screenshots with timestamped filename
+bindsym $mod+ctrl+i exec ~/.config/sway/scripts/clipboard-save-image.fish
+
 # ========== ALWAYS EXEC KANSHI (MULTI MONITORS HANDLING) ==========
 
 exec_always sh -c 'pkill kanshi; kanshi'
