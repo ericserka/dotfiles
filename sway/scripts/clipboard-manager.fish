@@ -5,8 +5,6 @@
 set -l wofi_args \
     --dmenu \
     --insensitive \
-    --conf ~/.config/sway/wofi/config \
-    --style ~/.config/sway/wofi/style.css \
     --prompt "📋 Clipboard" \
     --width 600 \
     --height 400 \
