@@ -54,7 +54,9 @@ require("lazy").setup(
           'angularls',
           'html',
           'prismals',
-          'nim_langserver'
+          'nim_langserver',
+          'fish_lsp',
+          'zls'
         }
       },
       dependencies = {
@@ -73,9 +75,9 @@ require("lazy").setup(
       build = ':TSUpdate'
     },
     -- Editor tools
-    { "nvim-tree/nvim-tree.lua", lazy = false },        -- File tree
-    { "tpope/vim-fugitive" },                           -- Git interface
-    { "lewis6991/gitsigns.nvim" },                      -- Git utilities
+    { "nvim-tree/nvim-tree.lua", lazy = false }, -- File tree
+    { "tpope/vim-fugitive" },                    -- Git interface
+    { "lewis6991/gitsigns.nvim" },               -- Git utilities
     {
       "akinsho/git-conflict.nvim",
       version = "*",

@@ -30,7 +30,9 @@ require "nvim-treesitter".install {
   "diff",
   "tsx",
   "po",
-  "nim"
+  "nim",
+  "zig",
+  "fish"
 }
 
 vim.api.nvim_create_autocmd("FileType", {
