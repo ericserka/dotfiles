@@ -242,7 +242,7 @@ bindsym Control+Shift+Print exec grim -g "$(slurp)" - | swappy -f -
 
 # ========== POWER KEYBINDINGS ==========
 
-bindsym $mod+Shift+p exec swaynag -t warning -m 'Power Menu' \
+bindsym $mod+Shift+p exec pkill swaynag || swaynag -t warning -m 'Power Menu' \
     -B 'Shutdown' 'systemctl poweroff' \
     -B 'Reboot' 'shutdown -r now' \
     -B 'Suspend' 'systemctl suspend' \
