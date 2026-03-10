@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 # clipboard-preview-image
-# Opens a preview of the current image in the clipboard using imv
+# Opens a preview of the current image in the clipboard using swayimg
 
 set -l tmp (mktemp /tmp/clipboard-preview-XXXXXX.png)
 
