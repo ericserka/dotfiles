@@ -8,9 +8,21 @@ vim.o.number = true
 vim.o.relativenumber = false
 
 -- Text wrapping related
-vim.o.wrap = false                                           -- Setting word wrap to false on all filetypes
-vim.cmd('autocmd FileType markdown setlocal wrap linebreak') -- Turning word wrap on again only for markdown files.
+
+-- Setting word wrap to false on all filetypes
+vim.o.wrap = false
+
 vim.o.textwidth = 100
+
+-- Turning word wrap on again only for markdown files.
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.textwidth = 0
+  end
+})
 
 -- Identation related
 vim.o.smartindent = true
