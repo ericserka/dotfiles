@@ -82,6 +82,26 @@ vim.keymap.set('n', '<leader>tme', function()
 end, { noremap = true, silent = true })
 
 
+-- [ S ]pell [ E ]nglish
+vim.keymap.set('n', '<leader>se', function()
+  vim.opt_local.spelllang = 'en_us'
+  vim.opt_local.spell = true
+  vim.notify('Spell: en_US', vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = 'Spell: English (US)' })
+
+-- [ S ]pell [ P ]ortuguese
+vim.keymap.set('n', '<leader>sp', function()
+  vim.opt_local.spelllang = 'pt_br'
+  vim.opt_local.spell = true
+  vim.notify('Spell: pt_BR', vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = 'Spell: Portuguese (BR)' })
+
+-- [ S ]pell [ O ]ff
+vim.keymap.set('n', '<leader>so', function()
+  vim.opt_local.spell = false
+  vim.notify('Spell: OFF', vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = 'Spell: Off' })
+
 ------------------------------------
 ------ Non mneumonical remaps ------
 ------------------------------------

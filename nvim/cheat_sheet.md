@@ -406,3 +406,19 @@ This shortcut in vscode is used to change multiple lines simultaneously (multi-c
 4. When you reach the last line you want to change, press `I`. `I`, within visual block mode, tells Vim to switch to insertion mode before the first line of the block.
 5. Make the necessary changes
 6. Exit insert mode (Esc)
+
+## Spellcheck
+
+### Native keybindings
+
+- `]s` goes to the next misspelled word
+- `[s` goes to the previous misspelled word
+- `zg` adds the word under the cursor to the dictionary (marks it as correct)
+- `zw` marks the word under the cursor as misspelled
+- `z=` shows suggestions for the misspelled word under the cursor
+
+### My keybindings
+
+- `<leader>se` set spell language to English US
+- `<leader>sp` set spell language to Portuguese Brazil
+- `<leader>so` disable spellcheck
