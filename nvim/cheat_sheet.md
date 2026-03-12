@@ -4,6 +4,8 @@ This cheat sheet has remaps specific to my configuration, but it also has severa
 
 ## The Basics
 
+- to force a "fresh reset" in neovim: `rm -rf .local/share/nvim/ .local/state/nvim/ .cache/nvim/`
+
 ### Normal mode
 
 The Normal mode is the default mode when launching Vim. It is the one you'll spend the most time using as it allows you to navigate the text, copy/cut/paste characters, words and lines, but also roll-back actions, and so on.
