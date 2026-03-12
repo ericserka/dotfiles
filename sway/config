@@ -253,10 +253,10 @@ bindsym $mod+F4 exec systemctl poweroff
 # ========== AUTO-LOCK ON IDLE ==========
 
 exec swayidle -w \
-    timeout 300 '~/.config/sway/scripts/swayidle-guard.sh swaylock -f' \
-    timeout 600 '~/.config/sway/scripts/swayidle-guard.sh swaymsg "output * power off"' \
+    timeout 300 '~/.config/sway/scripts/swayidle-guard.fish swaylock -f' \
+    timeout 600 '~/.config/sway/scripts/swayidle-guard.fish swaymsg "output * power off"' \
     resume 'swaymsg "output * power on"' \
-    timeout 900 '~/.config/sway/scripts/swayidle-guard.sh systemctl suspend' \
+    timeout 900 '~/.config/sway/scripts/swayidle-guard.fish systemctl suspend' \
     before-sleep 'swaylock -f'
 
 # ── Clipboard ────────────────────────────────────────────
