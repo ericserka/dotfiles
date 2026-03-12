@@ -213,7 +213,7 @@ Recommended to use the lua programming language, although I think there are othe
 3. inside the `~/.config/nvim/lua/plugins` folder, create lua plugin configuration files
     1. If the plugin doesn't need additional configuration, just put your require inside the `_other-plugin-requires.lua` file
 
-### Macros - Powerful Automation
+## Macros - Powerful Automation
 
 Macros are like recording a video of your commands:
 
@@ -388,7 +388,7 @@ A plugin that allows you to view CSV files through [csvlens](https://github.com/
 
 ## Reproducing vscode Features
 
-## CTRL-d
+### CTRL-d
 
 This vscode shortcut allows you to select several common terms and make the necessary changes. Step by step to reproduce in nvim:
 
@@ -396,7 +396,7 @@ This vscode shortcut allows you to select several common terms and make the nece
 2. With the cursor over the word you want to replace, press the `cgn` keys and type whatever you want
 3. To continue replacing, press `.` to repeat the last substitution (`.` is used to repeat the last command executed)
 
-## CTRL-SHIFT-DOWN
+### CTRL-SHIFT-DOWN
 
 This shortcut in vscode is used to change multiple lines simultaneously (multi-cursor).
 
