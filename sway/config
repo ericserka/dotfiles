@@ -245,7 +245,7 @@ bindsym Control+Shift+Print exec grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+Shift+p exec pkill swaynag || swaynag -t warning -m 'Power Menu' \
     -B 'Shutdown' 'systemctl poweroff' \
     -B 'Reboot' 'shutdown -r now' \
-    -B 'Suspend' 'systemctl suspend' \
+    -B 'Suspend' 'pkill swaynag; systemctl suspend' \
     -B 'Logout' 'swaymsg exit'
 
 bindsym $mod+F4 exec systemctl poweroff
