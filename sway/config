@@ -263,9 +263,6 @@ exec swayidle -w \
 # History daemon
 exec ~/.config/sway/scripts/cliphist-daemon.fish
 
-# Sincronize clipboard with primary selection (middle mouse button)
-exec wl-paste --primary --watch wl-copy
-
 # ── Keybindings ───────────────────────────────────
 # Open clipboard history in wofi
 bindsym $mod+Shift+v exec ~/.config/sway/scripts/clipboard-manager.fish pick
