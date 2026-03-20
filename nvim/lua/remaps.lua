@@ -82,6 +82,13 @@ vim.keymap.set('n', '<leader>tme', function()
 end, { noremap = true, silent = true })
 
 
+-- [ C ]opy [ R ]elative [ P ]ath
+vim.keymap.set('n', '<leader>crp', function()
+  local path = vim.fn.expand('%:.')
+  vim.fn.setreg('+', path)
+  vim.notify('Copied: ' .. path .. ' to system clipboard!', vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = 'Copy relative path to clipboard' })
+
 -- [ S ]pell [ E ]nglish
 vim.keymap.set('n', '<leader>se', function()
   vim.opt_local.spelllang = 'en_us'
