@@ -28,8 +28,18 @@ vim.api.nvim_set_keymap(
 )
 
 -- Pre commit
+local pre_commit_cmd = table.concat({
+  "mix format",
+  "mix compile --warnings-as-errors",
+  "mix xref graph --format cycles --label compile-connected --min-cycle-label 2 --fail-above 0",
+  "mix deps.unlock --check-unused",
+  "mix credo --ignore design",
+  "mix sobelow --config --skip",
+  "mix coveralls",
+}, " && ")
+
 vim.api.nvim_set_keymap('n', '<leader>pc',
-  ':TermExec cmd="mix format && mix compile --warnings-as-errors && mix credo && mix test" dir="."<CR>',
+  ':TermExec cmd="' .. pre_commit_cmd .. '" dir="."<CR>',
   { noremap = true, silent = true })
 
 -- Test on cursor
