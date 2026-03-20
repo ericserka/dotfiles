@@ -425,3 +425,15 @@ This shortcut in vscode is used to change multiple lines simultaneously (multi-c
 - `<leader>se` set spell language to English US
 - `<leader>sp` set spell language to Portuguese Brazil
 - `<leader>so` disable spellcheck
+
+## Treesitter folding
+
+Useful for collapsing file contents from the Treesitter syntax tree. For example: it's possible to collapse function scopes, HTML tags, etc.
+
+### Native keybindings
+
+- `za` toggle fold under the cursor
+- `zc` close fold under the cursor
+- `zo` open fold under the cursor
+- `zM` close all folds
+- `zR` open all folds

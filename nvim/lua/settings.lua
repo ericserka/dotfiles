@@ -52,8 +52,10 @@ vim.o.updatetime = 100
 vim.loader.enable()  -- Improves startup time
 vim.o.laststatus = 3 -- One statusline for all windows
 vim.o.hidden = true
-vim.o.foldmethod = "indent"
-vim.o.foldenable = false
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
 vim.o.scrolloff = 10
 vim.o.errorbells = false
 vim.o.numberwidth = 4
