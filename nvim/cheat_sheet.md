@@ -277,11 +277,14 @@ A highly customizable fuzzy finder over lists. It can be used to find, filter, p
 - `CTRL-v` enter the selected file in vertical split mode
 - `CTRL-u` go up to the preview file
 - `CTRL-d` go down to the preview file
+- `CTRL-f` go left to the preview file
+- `CTRL-k` go right to the preview file
 - `Ctrl-/` shows all mappings available in insert mode
 - `CTRL-p or <Up>` navigates up the file list in insert mode
 - `CTRL-n or <Down>` navigates down the file list in insert mode
 - `j/k` navigates up/down the file list in normal mode
 - `<CR>` enters the selected file
+- `CTRL-t` enters the selected file in new tab
 - `<Esc>` enters normal mode
 - `?` shows all mappings available in normal mode
 
