@@ -88,7 +88,7 @@ function _tt_start --description "Starts a tracked session"
         set title (string join " " $title)
     end
 
-    printf '%s\n%s\n%s\n%s\n%s\n' "$now" "$category" "$title" active 0 >$session_file
+    printf '%s\n%s\n%s\n%s\n%s\n%s\n' "$now" "$category" "$title" active 0 0 >$session_file
 
     if test -n "$title"
         echo "Session started at $now_hm [$category] - $title"
@@ -111,9 +111,10 @@ function _tt_stop --description "Stops the current session"
     set -l title (sed -n '3p' $session_file)
     set -l state (sed -n '4p' $session_file)
     set -l paused_seconds (sed -n '5p' $session_file)
+    set -l pause_count (sed -n '6p' $session_file)
 
     if test "$state" = paused
-        set -l pause_start (sed -n '6p' $session_file)
+        set -l pause_start (sed -n '7p' $session_file)
         set -l pause_start_epoch (date -d "$pause_start" +%s)
         set -l now_epoch (date +%s)
         set paused_seconds (math "$paused_seconds + $now_epoch - $pause_start_epoch")
@@ -141,8 +142,9 @@ function _tt_stop --description "Stops the current session"
     mkdir -p $day_dir
 
     set -l paused_display
-    if test $paused_seconds -gt 0
-        set paused_display (_tt_format_duration $paused_seconds)
+    if test "$pause_count" -gt 0
+        set -l paused_fmt (_tt_format_duration $paused_seconds)
+        set paused_display "$pause_count ($paused_fmt)"
     else
         set paused_display -
     end
@@ -154,11 +156,11 @@ function _tt_stop --description "Stops the current session"
         printf '%s\n' \
             "# $cap_category - $start_date" \
             "" \
-            "| Title | Start | End | Gross | Paused | Net |" \
+            "| Title | Start | End | Gross | Pauses | Net |" \
             "|-------|-------|-----|-------|--------|-----|" \
             "$table_row" \
             "" \
-            "**Net total: $net_fmt** | Gross total: $gross_fmt" >$cat_file
+            "**Net total: $net_fmt** | Gross total: $gross_fmt | Total pauses: $paused_display" >$cat_file
     else
         sed -i '/^\*\*\(Net\|Total\)/d' $cat_file
         sed -i -e :a -e '/^\n*$/{$d;N;ba' -e '}' $cat_file
@@ -166,10 +168,25 @@ function _tt_stop --description "Stops the current session"
 
         set -l total_net 0
         set -l total_gross 0
+        set -l total_pause_count 0
+        set -l total_paused_seconds 0
         for line in (grep -E '^\|.*\|.*\| [0-9]{2}:[0-9]{2}' $cat_file)
             set -l g (echo $line | awk -F'|' '{print $5}' | string trim)
             set -l g_s (_tt_parse_duration "$g")
             set total_gross (math "$total_gross + $g_s")
+
+            set -l p (echo $line | awk -F'|' '{print $6}' | string trim)
+            if test "$p" != "-"
+                set -l p_count (string match -r '(\d+) \(' "$p")
+                if test -n "$p_count"
+                    set total_pause_count (math "$total_pause_count + $p_count[2]")
+                end
+                set -l p_dur (string match -r '\((.+)\)' "$p")
+                if test -n "$p_dur"
+                    set -l p_s (_tt_parse_duration "$p_dur[2]")
+                    set total_paused_seconds (math "$total_paused_seconds + $p_s")
+                end
+            end
 
             set -l n (echo $line | awk -F'|' '{print $7}' | string trim)
             set -l n_s (_tt_parse_duration "$n")
@@ -178,8 +195,15 @@ function _tt_stop --description "Stops the current session"
 
         set -l total_net_fmt (_tt_format_duration $total_net)
         set -l total_gross_fmt (_tt_format_duration $total_gross)
+        set -l total_pauses_display
+        if test "$total_pause_count" -gt 0
+            set -l total_paused_fmt (_tt_format_duration $total_paused_seconds)
+            set total_pauses_display "Total pauses: $total_pause_count ($total_paused_fmt)"
+        else
+            set total_pauses_display "Total pauses: -"
+        end
         echo "" >>$cat_file
-        echo "**Net total: $total_net_fmt** | Gross total: $total_gross_fmt" >>$cat_file
+        echo "**Net total: $total_net_fmt** | Gross total: $total_gross_fmt | $total_pauses_display" >>$cat_file
     end
 
     rm $session_file
@@ -229,10 +253,12 @@ function _tt_pause --description "Pauses the current session"
     set -l category (sed -n '2p' $session_file)
     set -l title (sed -n '3p' $session_file)
     set -l paused_seconds (sed -n '5p' $session_file)
+    set -l pause_count (sed -n '6p' $session_file)
+    set pause_count (math "$pause_count + 1")
     set -l now (date +%Y-%m-%dT%H:%M:%S)
     set -l now_hm (date +%H:%M)
 
-    printf '%s\n%s\n%s\n%s\n%s\n%s\n' "$start_time" "$category" "$title" paused "$paused_seconds" "$now" >$session_file
+    printf '%s\n%s\n%s\n%s\n%s\n%s\n%s\n' "$start_time" "$category" "$title" paused "$paused_seconds" "$pause_count" "$now" >$session_file
 
     echo "Session paused at $now_hm"
 end
@@ -255,7 +281,8 @@ function _tt_resume --description "Resumes a paused session"
     set -l category (sed -n '2p' $session_file)
     set -l title (sed -n '3p' $session_file)
     set -l paused_seconds (sed -n '5p' $session_file)
-    set -l pause_start (sed -n '6p' $session_file)
+    set -l pause_count (sed -n '6p' $session_file)
+    set -l pause_start (sed -n '7p' $session_file)
 
     set -l pause_start_epoch (date -d "$pause_start" +%s)
     set -l now_epoch (date +%s)
@@ -265,7 +292,7 @@ function _tt_resume --description "Resumes a paused session"
     set -l now_hm (date +%H:%M)
     set -l pause_duration (_tt_format_duration $this_pause)
 
-    printf '%s\n%s\n%s\n%s\n%s\n' "$start_time" "$category" "$title" active "$paused_seconds" >$session_file
+    printf '%s\n%s\n%s\n%s\n%s\n%s\n' "$start_time" "$category" "$title" active "$paused_seconds" "$pause_count" >$session_file
 
     echo "Session resumed at $now_hm (paused for $pause_duration)"
 end
@@ -283,6 +310,7 @@ function _tt_status --description "Shows current session status"
     set -l title (sed -n '3p' $session_file)
     set -l state (sed -n '4p' $session_file)
     set -l paused_seconds (sed -n '5p' $session_file)
+    set -l pause_count (sed -n '6p' $session_file)
 
     set -l start_hm (date -d "$start_time" +%H:%M)
     set -l start_epoch (date -d "$start_time" +%s)
@@ -291,7 +319,7 @@ function _tt_status --description "Shows current session status"
 
     set -l total_paused $paused_seconds
     if test "$state" = paused
-        set -l pause_start (sed -n '6p' $session_file)
+        set -l pause_start (sed -n '7p' $session_file)
         set -l pause_start_epoch (date -d "$pause_start" +%s)
         set total_paused (math "$total_paused + $now_epoch - $pause_start_epoch")
     end
@@ -312,9 +340,9 @@ function _tt_status --description "Shows current session status"
         echo "Title: $title"
     end
     echo "Net time: $net_fmt | Gross time: $gross_fmt"
-    if test $total_paused -gt 0
+    if test "$pause_count" -gt 0
         set -l paused_fmt (_tt_format_duration $total_paused)
-        echo "Paused time: $paused_fmt"
+        echo "Pauses: $pause_count ($paused_fmt)"
     end
 end
 
