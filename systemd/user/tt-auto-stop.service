@@ -1,0 +1,11 @@
+[Unit]
+Description=Auto-stop time tracking session on shutdown/reboot
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecStop=/usr/bin/fish -c "tt stop"
+
+[Install]
+WantedBy=default.target
