@@ -9,18 +9,14 @@ vim.o.relativenumber = false
 
 -- Text wrapping related
 
--- Setting word wrap to false on all filetypes
-vim.o.wrap = false
+-- Visual (soft) wrap: lines break visually but remain a single line in the buffer
+vim.o.wrap = true
+vim.o.linebreak = true
+vim.o.textwidth = 0
 
-vim.o.textwidth = 100
-
--- Turning word wrap on again only for markdown files.
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
   callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true
-    vim.opt_local.textwidth = 0
     vim.opt_local.spell = true
     vim.opt_local.spelllang = 'pt_br'
   end
