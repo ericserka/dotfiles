@@ -13,6 +13,7 @@ vim.o.relativenumber = false
 vim.o.wrap = true
 vim.o.linebreak = true
 vim.o.textwidth = 0
+vim.opt.diffopt:append("followwrap")
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'markdown',
