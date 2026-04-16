@@ -2,12 +2,12 @@ set fish_greeting
 
 # Sway configuration code
 if test -z "$WAYLAND_DISPLAY"; and test "$XDG_VTNR" -eq 1
-	exec sway
+    exec sway
 end
 
 # SSH Agent configuration code
 if test -z "$SSH_AGENT_PID"
-    eval (ssh-agent -c) > /dev/null
+    eval (ssh-agent -c) >/dev/null
 end
 
 # ASDF configuration code
@@ -27,3 +27,7 @@ set --erase _asdf_shims
 # Homebrew configuration code
 export PATH="$HOME/.local/bin:$PATH"
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+# Neovim configuration code
+set -gx EDITOR nvim
+set -gx VISUAL nvim
