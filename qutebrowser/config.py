@@ -11,3 +11,9 @@ c.url.searchengines = {
 
 c.url.start_pages = ["https://www.google.com"]
 c.url.default_page = "https://www.google.com"
+
+# keybindings
+config.bind("pp", "open -- {clipboard}")
+config.bind("pt", "open -t -- {clipboard}")
+config.bind(",f", "hint links tab")
+config.bind(",F", "hint links tab-fg")
