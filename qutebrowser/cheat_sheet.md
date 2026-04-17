@@ -18,6 +18,9 @@
 - `gK` (command `:tab-move -`) moves the current tab one position to the left.
 - Both commands accept a count, so `3gJ` moves the current tab three positions to the right.
 
+### Switching between recently used tabs
+- `<Ctrl+Tab>` (command `:tab-focus last`) alternates between the most recently used tabs.
+
 ## Hints
 
 - Hints are qutebrowser's way of interacting with the page without the mouse. When you trigger a hint command, each targetable element on the page receives a short label; typing that label activates the element.
