@@ -14,5 +14,10 @@ if test -f /sys/class/power_supply/BAT0/status; and test (cat /sys/class/power_s
     exit 0
 end
 
+# Rule 3: audio playing → do not execute / do not idle
+if command -q pactl; and pactl list sinks 2>/dev/null | grep -q '^\s*State: RUNNING$'
+    exit 0
+end
+
 # No restriction conditions, execute the command / idle
 exec $argv
