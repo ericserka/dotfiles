@@ -37,6 +37,15 @@
 ### Jumping to input fields
 - `gi` (command `:edit-text` / insert-mode on the first input) focuses the first input field on the page and enters insert mode automatically. If you have previously focused another input on the same page, `gi` returns to that one instead. This is often faster than using `;t` when the page has a single, obvious input (search boxes, login forms, etc.).
 
+## Position history within a page
+
+- Qutebrowser keeps track of your scroll position so you can jump back and forth, similar to Vim's jump list and mark system.
+- `''` (two single quotes) jumps back to the previous scroll position after a jump. Pressing it again returns to where you were before — useful after using `G` (bottom), `gg` (top), search results, or any command that moves the viewport significantly.
+- You can also set named marks (Vim style):
+  - command `:set-mark <letter>` sets a mark with the given letter at the current scroll position. Lowercase letters are local to the page; uppercase letters are global across pages.
+  - `'{letter}` (command `:jump-mark`) jumps to the position stored in that mark.
+  - Marks are not persisted: they are lost when the browser is closed. There is also no built-in way to list the currently set marks — you have to remember which letters you used.
+
 ## Accessing urls quickly
 
 - There are basically 2 ways to access urls quickly: bookmarks and quickmarks.
