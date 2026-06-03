@@ -340,9 +340,21 @@ Git decorations/integration for buffers.
 A collection of common configurations for the Nvim LSP client.
 
 - `:LspInfo` shows the status of active and configured language servers
-- `gd` or `CTRL-LeftMouse` goes to the definition of the word under the cursor
+- `gdb` or `CTRL-LeftMouse` goes to the definition of the word under the cursor (same buffer)
+- `gdt` goes to the definition in a new tab
+- `gds` goes to the definition in a vertical split to the right
+- `gr` lists the references of the word under the cursor
+- `gi` goes to the implementation of the word under the cursor
+- `ga` shows the available code actions for the word under the cursor
 - `K` shows the documentation of the word under the cursor (hover)
-- `CTRL-x` shows error diagnostics
+- `td` goes to the type definition of the word under the cursor
+- `CTRL-x` shows error diagnostics (opens the diagnostics float)
+- `<leader>cs` shows the signature help of the word under the cursor
+- `<leader>cr` renames the word under the cursor (across the project)
+- `<leader>jd` goes to the declaration of the word under the cursor
+- `<leader>jn` goes to the next diagnostic
+- `<leader>jp` goes to the previous diagnostic
+- `<leader>ch` toggles inlay hints in the current buffer
 - List of all LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
     
 ### Mason
