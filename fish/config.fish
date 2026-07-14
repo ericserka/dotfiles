@@ -31,3 +31,6 @@ eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 # Neovim configuration code
 set -gx EDITOR nvim
 set -gx VISUAL nvim
+
+# opencode
+fish_add_path "$HOME/.opencode/bin"
