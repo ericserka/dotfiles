@@ -246,18 +246,18 @@ bindsym $mod+Shift+p exec pkill swaynag || swaynag -t warning -m 'Power Menu' \
     -B 'Shutdown' 'systemctl poweroff' \
     -B 'Reboot' 'shutdown -r now' \
     -B 'Suspend' 'pkill swaynag; systemctl suspend' \
-    -B 'Logout' 'swaymsg exit'
+    -B 'Logout' '~/.config/sway/scripts/vault-lock.fish; swaymsg exit'
 
 bindsym $mod+F4 exec systemctl poweroff
 
 # ========== AUTO-LOCK ON IDLE ==========
 
 exec swayidle -w \
-    timeout 300 '~/.config/sway/scripts/swayidle-guard.fish swaylock -f' \
+    timeout 300 '~/.config/sway/scripts/swayidle-guard.fish ~/.config/sway/scripts/lock-session.fish' \
     timeout 600 '~/.config/sway/scripts/swayidle-guard.fish swaymsg "output * power off"' \
     resume 'swaymsg "output * power on"' \
     timeout 900 '~/.config/sway/scripts/swayidle-guard.fish systemctl suspend' \
-    before-sleep 'swaylock -f'
+    before-sleep '~/.config/sway/scripts/lock-session.fish'
 
 # ── Clipboard ────────────────────────────────────────────
 # History daemon
