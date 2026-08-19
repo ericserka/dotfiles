@@ -296,4 +296,15 @@ bindsym $mod+Shift+b exec $browser
 
 bindsym $mod+period exec rofimoji
 
+# ========== NOTIFICATIONS (MAKO) ==========
+
+# dismiss the most recent notification
+bindsym $mod+n exec makoctl dismiss
+
+# dismiss every visible notification
+bindsym $mod+Shift+n exec makoctl dismiss --all
+
+# restore the last dismissed/expired notification
+bindsym $mod+Control+n exec makoctl restore
+
 include /etc/sway/config.d/*
