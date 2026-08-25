@@ -12,6 +12,7 @@
     "clock"
   ],
   "modules-right": [
+    "custom/recording",
     "cpu",
     "memory",
     "temperature",
@@ -95,5 +96,12 @@
   },
   "tray": {
     "spacing": 10
+  },
+  "custom/recording": {
+    "exec": "~/.config/sway/scripts/recording-status.fish",
+    "return-type": "json",
+    "interval": 2,
+    "signal": 8,
+    "on-click": "~/.config/sway/scripts/record-region.fish"
   }
 }
