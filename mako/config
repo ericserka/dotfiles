@@ -54,3 +54,6 @@ default-timeout=0
 [app-name="Screenshot"]
 default-timeout=3000
 anchor=bottom-right
+
+[app-name="Recording"]
+anchor=bottom-right
