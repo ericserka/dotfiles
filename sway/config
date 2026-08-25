@@ -240,6 +240,11 @@ bindsym Control+Print exec grim -g "$(slurp)" - | wl-copy && notify-send -a "Scr
 # region with edit (swappy)
 bindsym Control+Shift+Print exec grim -g "$(slurp)" - | swappy -f -
 
+# ========== SCREEN RECORDING ==========
+
+# toggle region recording: select an area to start, press again to stop
+bindsym $mod+Print exec ~/.config/sway/scripts/record-region.fish
+
 # ========== POWER KEYBINDINGS ==========
 
 bindsym $mod+Shift+p exec pkill swaynag || swaynag -t warning -m 'Power Menu' \
