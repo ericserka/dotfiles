@@ -6,8 +6,10 @@ if test -z "$WAYLAND_DISPLAY"; and test "$XDG_VTNR" -eq 1
 end
 
 # SSH Agent configuration code
-if test -z "$SSH_AGENT_PID"
-    eval (ssh-agent -c) >/dev/null
+# The agent itself runs as a systemd user service (ssh-agent.service)
+# listening on a fixed socket; shells only need to point at it.
+if test -n "$XDG_RUNTIME_DIR"
+    set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
 end
 
 # ASDF configuration code

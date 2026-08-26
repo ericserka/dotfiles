@@ -10,7 +10,7 @@ Personal [Fish shell](https://fishshell.com/) configuration for an Arch Linux + 
 
 Fish autoloads files by directory convention — there is no central "require"/import list. Where you put a file determines when and how it loads:
 
-- `config.fish` — runs once per interactive shell, top to bottom. Holds startup logic that must be ordered: exec-into-Sway on VT1, ssh-agent bootstrap, PATH construction (asdf shims, Homebrew, `~/.local/bin`, opencode), and `$EDITOR`/`$VISUAL`.
+- `config.fish` — runs for **every** fish shell (interactive or not), top to bottom. Holds startup logic that must be ordered: exec-into-Sway on VT1, `SSH_AUTH_SOCK` export (the agent itself runs as the `ssh-agent.service` systemd user unit on a fixed socket — never spawn `ssh-agent` from shell startup; a past per-shell spawn leaked thousands of agents via waybar's 2s fish scripts), PATH construction (asdf shims, Homebrew, `~/.local/bin`, opencode), and `$EDITOR`/`$VISUAL`.
 - `conf.d/*.fish` — sourced automatically at startup, **before** `config.fish`, in alphabetical order. Use for environment setup and for defining functions that should always exist. Files here define functions eagerly (e.g. all `bw-*`, `rec-*`, `open`).
 - `functions/*.fish` — **lazily autoloaded** by filename: `functions/vault-open.fish` is only sourced the first time `vault-open` is invoked. The file's primary function name must match the filename. Helper functions may live in the same file and load alongside it.
 - `completions/*.fish` — lazily autoloaded to provide tab completions for the command matching the filename (`completions/<cmd>.fish` → `<cmd>`).
