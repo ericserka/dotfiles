@@ -312,4 +312,15 @@ bindsym $mod+Shift+n exec makoctl dismiss --all
 # restore the last dismissed/expired notification
 bindsym $mod+Control+n exec makoctl restore
 
+# ========== SCREEN ANNOTATION (WAYSCRIBER) ==========
+
+# show/hide the annotation overlay, starting the daemon on first use
+bindsym $mod+Shift+a exec ~/.config/sway/scripts/wayscriber-session.fish toggle
+
+# light passthrough: overlay stays visible, input reaches the app below
+bindsym $mod+Shift+z exec ~/.config/sway/scripts/wayscriber-session.fish light
+
+# shut the daemon down once the presentation or recording is over
+bindsym $mod+Control+a exec ~/.config/sway/scripts/wayscriber-session.fish stop
+
 include /etc/sway/config.d/*
