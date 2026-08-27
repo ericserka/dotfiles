@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Eric's personal dotfiles for an **Arch Linux + Sway (Wayland)** machine. Each top-level directory is one application's config and mirrors its live location under `$HOME`:
 
 - `<tool>/` → `~/.config/<tool>/` for `fish`, `nvim`, `sway`, `foot`, `kanshi`, `mako`, `qutebrowser`, `swappy`, `swaylock`, `waybar`, `wofi`, `systemd`.
-- Root files map into `$HOME` directly: `.wezterm.lua` → `~/.wezterm.lua`, `rofimoji.rc` → `~/.config/rofimoji.rc`.
+- Root files map into `$HOME` directly: `.wezterm.lua` → `~/.wezterm.lua`, `rofimoji.rc` → `~/.config/rofimoji.rc`, `mimeapps.list` → `~/.config/mimeapps.list`.
 
 The repo is a **versioned mirror**, not the live tree — files here are plain copies of what lives under `~/.config` (not symlinks, and there is no stow/chezmoi/install script). Editing a file here does **not** change running programs until the same file is in place under `~/.config`; the per-tool testing instructions below all operate on the `~/.config` copy. There is no build system and no automated tests anywhere in this repo — verification is always running the affected program by hand.
 
