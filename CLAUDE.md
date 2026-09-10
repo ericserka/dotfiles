@@ -32,4 +32,5 @@ These pieces span directories — a change in one usually requires a matching ch
 ## Conventions
 
 - **Environment assumption:** everything targets Wayland/Sway + Arch and specific tools — `wl-copy`/`wl-paste`, `slurp`, `pactl`, `gocryptfs`/`fusermount3`, `wf-recorder`, `jq`, Flatpak apps, `notify-send` for user feedback. Reuse these; do not introduce X11/GNOME equivalents.
-- **American English** in all identifiers, comments, and user-facing/log strings, regardless of any Portuguese content in reference docs (e.g. `nvim/cheat_sheet.md`, spell files) — those docs are personal reference, not loaded config.
+- **American English** in all identifiers, comments, and user-facing/log strings, regardless of any Portuguese content in reference docs (e.g. `nvim/cheat_sheet.md`) — those docs are personal reference, not loaded config.
+- **Ignored paths:** `nvim/spell/` is machine-local data (personal word lists and their generated `.spl` binaries) and is git-ignored — do not re-add it.
