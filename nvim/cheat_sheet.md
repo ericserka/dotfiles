@@ -213,6 +213,46 @@ Recommended to use the lua programming language, although I think there are othe
 3. inside the `~/.config/nvim/lua/plugins` folder, create lua plugin configuration files
     1. If the plugin doesn't need additional configuration, just put your require inside the `_other-plugin-requires.lua` file
 
+## Updating plugins, parsers and LSP servers
+
+Each layer is managed by a different plugin, and the order matters: `nvim-treesitter` is on the `main` branch, where parser revisions are pinned by the plugin revision, so the plugin has to be updated before its parsers.
+
+### 1. Plugins - `:Lazy sync`
+
+Updates every plugin, installs the missing ones, removes the ones dropped from `lazy-config.lua` and rewrites `lazy-lock.json`.
+
+- `:Lazy sync` updates + installs + cleans in one go
+- `:Lazy update` only updates (no install/clean)
+- `:Lazy` opens the UI, where `S` syncs and `U` updates
+
+### 2. Treesitter parsers - `:TSUpdate`
+
+- `:TSUpdate` updates all installed parsers
+- `:TSUpdate <lang>` updates a single parser (e.g. `:TSUpdate elixir`)
+- The plugin spec declares `build = ':TSUpdate'`, so lazy.nvim already runs it whenever `nvim-treesitter` itself is updated; running it by hand is just a safety net
+
+### 3. LSP servers (Mason) - `:Mason` then `U`
+
+Watch out: `:MasonUpdate` does **not** update the installed servers - on Mason v2 it only refreshes the registries (the package catalog).
+
+- `:MasonUpdate` refreshes the registries (do this first)
+- `:Mason` opens the UI
+    - `U` updates all installed packages
+    - `u` updates only the package under the cursor
+
+### 4. Restart and verify
+
+Restart Neovim and run `:checkhealth` (`mason`, `nvim-treesitter` and `vim.lsp` are the sections worth reading).
+
+### Headless one-liners
+
+```sh
+nvim --headless "+Lazy! sync" +qa
+nvim --headless -c "lua require('nvim-treesitter.install').update():wait(600000)" -c "qa"
+```
+
+Mason has no headless "update everything" command - the `:Mason` UI with `U` is the only way.
+
 ## Macros - Powerful Automation
 
 Macros are like recording a video of your commands:
