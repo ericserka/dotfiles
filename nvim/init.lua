@@ -5,6 +5,7 @@ require('pack-config')
 
 -- Native features that replaced plugins
 require('native.completion')
+require('native.inline-completion')
 
 -- Plugin configs
 require('plugins.theme')

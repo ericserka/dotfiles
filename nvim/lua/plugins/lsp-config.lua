@@ -1,8 +1,9 @@
 -- LSP client behavior shared by every server (native vim.lsp.config API).
 -- Servers are installed and enabled through Mason (plugins/mason-config.lua);
 -- per-server overrides live in after/lsp/<server>.lua. Completion lives in
--- lua/native/completion.lua. Word highlighting stays with vim-illuminate
--- (see pack-config.lua for why).
+-- lua/native/completion.lua and ghost-text suggestions in
+-- lua/native/inline-completion.lua. Word highlighting stays with
+-- vim-illuminate (see pack-config.lua for why).
 
 -- Jump to a diagnostic and show it in a float (what goto_next/goto_prev did).
 local function jump_to_diagnostic(count)

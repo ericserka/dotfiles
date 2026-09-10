@@ -31,5 +31,6 @@ require("mason-lspconfig").setup({
     "nim_langserver",
     "fish_lsp",
     "zls",
+    "copilot", -- copilot-language-server: ghost-text suggestions, see lua/native/inline-completion.lua
   },
 })

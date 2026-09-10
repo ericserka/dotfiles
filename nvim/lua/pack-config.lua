@@ -63,7 +63,6 @@ vim.pack.add({
   -- the native LSP highlight covers neither; illuminate falls back to
   -- treesitter/regex there. Retire it once those servers support the method.
   github("RRethy/vim-illuminate"),
-  github("github/copilot.vim"),
   -- Language specific
   github("MeanderingProgrammer/render-markdown.nvim"),
   github("theKnightsOfRohan/csvlens.nvim"),
