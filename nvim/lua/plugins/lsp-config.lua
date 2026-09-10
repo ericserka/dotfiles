@@ -61,5 +61,5 @@ cmp.setup {
 
 vim.lsp.config("*", {
   on_attach = on_attach,
-  capabilities
+  capabilities = capabilities,
 })
