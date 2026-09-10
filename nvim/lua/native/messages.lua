@@ -22,21 +22,16 @@ end
 
 ui2.enable({
   msg = {
-    -- Per-kind routing (see :h ui-messages). Kinds not listed stay in the
-    -- cmdline ("cmd"). Notification-like kinds go to the ephemeral "msg"
-    -- window (bottom-right, hidden after `timeout`), the closest native
-    -- analogue to the nvim-notify toasts noice used.
+    -- Default destination: the ephemeral "msg" window (bottom-right, hidden
+    -- after `timeout`), the native analogue of the nvim-notify toasts noice
+    -- used. It must be the default, not just listed per kind: with "cmd" as
+    -- the default an empty `echo` clears every window, and fugitive emits
+    -- empty echoes while streaming `:Git push`/`:Git pull` output.
+    target = "msg",
+    -- Exceptions that stay in the cmdline window (a trigger wins over a kind).
     targets = {
-      echomsg = "msg",   -- vim.notify() INFO/WARN, :echomsg
-      echoerr = "msg",   -- vim.notify() ERROR, :echoerr
-      echo = "msg",      -- plugin messages without history (e.g. gitsigns "Hunk 2 of 3")
-      lua_print = "msg", -- print() / vim.print()
-      emsg = "msg",      -- Vim errors (E123: ...)
-      lua_error = "msg", -- errors raised from Lua
-      rpc_error = "msg",
-      wmsg = "msg",      -- warnings (W10, "search hit BOTTOM")
-      progress = "msg",  -- progress messages (nvim_echo kind "progress")
-      typed_cmd = "cmd", -- output of an interactively typed :command stays in the cmdline
+      typed_cmd = "cmd",  -- output of an interactively typed :command, kept until the next key
+      completion = "cmd", -- "match 1 of N" while the completion menu is open
     },
     cmd = { height = 0.5 },                 -- max cmdline height while temporarily expanded
     msg = { height = 0.5, timeout = 4000 }, -- toast window: max height, visibility in ms
