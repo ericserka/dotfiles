@@ -33,6 +33,7 @@ vim.o.shiftwidth = 2
 vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.hlsearch = true
+vim.opt.shortmess:append("S") -- The search count is shown by lualine, not in the cmdline
 
 -- Window splits related
 vim.o.splitbelow = true

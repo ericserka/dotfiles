@@ -18,7 +18,7 @@ require("lualine").setup(
       lualine_x = {
         {
           search_count,
-          cond = require("noice").api.status.search.has,
+          cond = function() return vim.v.hlsearch == 1 end,
           color = { fg = "#56b6c2" },
         },
       }

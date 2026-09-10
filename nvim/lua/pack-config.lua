@@ -73,6 +73,4 @@ vim.pack.add({
   github("mfussenegger/nvim-dap"),
   { src = github("JavaHello/spring-boot.nvim"), version = "218c0c26c14d99feca778e4d13f5ec3e8b1b60f0" },
   github("adelarsq/image_preview.nvim"),
-  github("folke/noice.nvim"), -- Messages/cmdline UI (depends on nui.nvim above and nvim-notify)
-  github("rcarriga/nvim-notify"),
 }, { confirm = false }) -- lazy.nvim installed without asking; keep that behavior

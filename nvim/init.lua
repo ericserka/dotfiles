@@ -4,6 +4,7 @@ require('remaps')
 require('pack-config')
 
 -- Native features that replaced plugins
+require('native.messages')
 require('native.completion')
 require('native.inline-completion')
 
@@ -22,4 +23,3 @@ require('plugins.gitsigns-config')
 require('plugins.lualine-config')
 require('plugins.csvlens-config')
 require('plugins.java-config')
-require('plugins.noice-config')
