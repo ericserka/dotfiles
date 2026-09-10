@@ -3,6 +3,9 @@ require('settings')
 require('remaps')
 require('pack-config')
 
+-- Native features that replaced plugins
+require('native.completion')
+
 -- Plugin configs
 require('plugins.theme')
 require('plugins.mason-config')

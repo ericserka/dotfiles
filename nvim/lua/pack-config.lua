@@ -39,8 +39,6 @@ vim.pack.add({
   github("mason-org/mason.nvim"),
   github("mason-org/mason-lspconfig.nvim"),
   github("neovim/nvim-lspconfig"),
-  github("hrsh7th/nvim-cmp"),
-  github("hrsh7th/cmp-nvim-lsp"),
   -- Treesitter parser and query installer (highlighting itself is native).
   -- `main` is the maintained branch; pinned explicitly because
   -- vim.pack.update() never follows an upstream default-branch change.

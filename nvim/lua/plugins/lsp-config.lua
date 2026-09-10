@@ -1,13 +1,8 @@
 -- LSP client behavior shared by every server (native vim.lsp.config API).
 -- Servers are installed and enabled through Mason (plugins/mason-config.lua);
--- per-server overrides live in after/lsp/<server>.lua. Word highlighting
--- stays with vim-illuminate (see pack-config.lua for why).
-
--- Autocompletion
-local cmp = require('cmp')
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- per-server overrides live in after/lsp/<server>.lua. Completion lives in
+-- lua/native/completion.lua. Word highlighting stays with vim-illuminate
+-- (see pack-config.lua for why).
 
 -- Jump to a diagnostic and show it in a float (what goto_next/goto_prev did).
 local function jump_to_diagnostic(count)
@@ -74,24 +69,6 @@ local function on_attach(client, bufnr)
   set_keymaps(bufnr)
 end
 
-cmp.setup {
-  mapping = {
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<Down>'] = cmp.mapping.select_next_item(),
-    ['<Up>'] = cmp.mapping.select_prev_item(),
-    ['<C-j>'] = cmp.mapping.scroll_docs(4),
-    ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-  },
-}
-
 vim.lsp.config("*", {
   on_attach = on_attach,
-  capabilities = capabilities,
 })
