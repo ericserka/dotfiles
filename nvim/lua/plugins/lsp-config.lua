@@ -1,42 +1,78 @@
+-- LSP client behavior shared by every server (native vim.lsp.config API).
+-- Servers are installed and enabled through Mason (plugins/mason-config.lua);
+-- per-server overrides live in after/lsp/<server>.lua. Word highlighting
+-- stays with vim-illuminate (see pack-config.lua for why).
+
 -- Autocompletion
 local cmp = require('cmp')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local on_attach = function(client, bufnr)
-  -- Format on save if documentFormattingProvider
-  if client.server_capabilities.documentFormattingProvider and vim.bo.filetype ~= "sql" then
-    vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.format()')
-  end
-
-  -- Mappings.
-  local opts = { noremap = true, silent = true }
-
-  vim.keymap.set('n', '<C-x>', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.keymap.set('n', 'gdb', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.keymap.set('n', 'gdt', function()
-    vim.cmd('tab split')
-    vim.lsp.buf.definition()
-  end, opts)
-  vim.keymap.set('n', 'gds', function()
-    vim.cmd('rightbelow vsplit')
-    vim.lsp.buf.definition()
-  end, opts)
-  vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.keymap.set('n', 'td', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.keymap.set('n', '<leader>cs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.keymap.set('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.keymap.set('n', '<leader>jd', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.keymap.set('n', '<leader>jn', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  vim.keymap.set('n', '<leader>jp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  vim.keymap.set('n', '<leader>ch',
-    '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })<CR>', opts)
+-- Jump to a diagnostic and show it in a float (what goto_next/goto_prev did).
+local function jump_to_diagnostic(count)
+  vim.diagnostic.jump({
+    count = count,
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+    end,
+  })
 end
 
+-- Format on save when the server can format (SQL is excluded).
+local function enable_format_on_save(client, bufnr)
+  if not client:supports_method("textDocument/formatting", bufnr) or vim.bo[bufnr].filetype == "sql" then
+    return
+  end
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("user_lsp_format_on_save_" .. bufnr, { clear = true }),
+    buffer = bufnr,
+    desc = "Format the buffer with LSP before writing it",
+    callback = function()
+      vim.lsp.buf.format({ bufnr = bufnr })
+    end,
+  })
+end
+
+local function set_keymaps(bufnr)
+  local function map(lhs, rhs, desc)
+    vim.keymap.set("n", lhs, rhs, { buf = bufnr, silent = true, desc = desc })
+  end
+
+  map("<C-x>", vim.diagnostic.open_float, "Show diagnostics under the cursor")
+  map("gdb", vim.lsp.buf.definition, "Go to definition")
+  map("gdt", function()
+    vim.cmd("tab split")
+    vim.lsp.buf.definition()
+  end, "Go to definition in a new tab")
+  map("gds", function()
+    vim.cmd("rightbelow vsplit")
+    vim.lsp.buf.definition()
+  end, "Go to definition in a vertical split")
+  map("gr", vim.lsp.buf.references, "References")
+  map("gi", vim.lsp.buf.implementation, "Implementation")
+  map("ga", vim.lsp.buf.code_action, "Code action")
+  map("K", function() vim.lsp.buf.hover({ silent = true }) end, "Hover documentation")
+  map("td", vim.lsp.buf.type_definition, "Type definition")
+  -- [ C ]ode [ S ]ignature
+  map("<leader>cs", function() vim.lsp.buf.signature_help({ silent = true }) end, "Signature help")
+  -- [ C ]ode [ R ]ename
+  map("<leader>cr", vim.lsp.buf.rename, "Rename symbol")
+  -- [ J ]ump to [ D ]eclaration
+  map("<leader>jd", vim.lsp.buf.declaration, "Declaration")
+  -- [ J ]ump to [ N ]ext / [ P ]revious diagnostic
+  map("<leader>jn", function() jump_to_diagnostic(vim.v.count1) end, "Next diagnostic")
+  map("<leader>jp", function() jump_to_diagnostic(-vim.v.count1) end, "Previous diagnostic")
+  -- [ C ]ode [ H ]ints
+  map("<leader>ch", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }), { bufnr = bufnr })
+  end, "Toggle inlay hints")
+end
+
+local function on_attach(client, bufnr)
+  enable_format_on_save(client, bufnr)
+  set_keymaps(bufnr)
+end
 
 cmp.setup {
   mapping = {
@@ -54,10 +90,6 @@ cmp.setup {
     { name = 'nvim_lsp' },
   },
 }
-
--- setup nvim-java before lspconfig
--- removing java setup temporarily
--- require('java').setup()
 
 vim.lsp.config("*", {
   on_attach = on_attach,
