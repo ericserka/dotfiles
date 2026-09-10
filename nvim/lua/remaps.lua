@@ -131,8 +131,8 @@ vim.api.nvim_set_keymap('n', '<Left>', ':vertical resize +2<CR>', { noremap = tr
 vim.api.nvim_set_keymap('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 
 -- Navigate buffers
-vim.api.nvim_set_keymap('n', '<S-h>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-l>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<S-h>', '<cmd>bprevious<CR>', { silent = true, desc = 'Previous buffer' })
+vim.keymap.set('n', '<S-l>', '<cmd>bnext<CR>', { silent = true, desc = 'Next buffer' })
 
 -- Cut and paste
 vim.api.nvim_set_keymap('i', '<C-Del>', '<C-o>dw', { noremap = true, silent = true })
