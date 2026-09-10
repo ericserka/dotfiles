@@ -16,7 +16,7 @@ The repo is a **versioned mirror**, not the live tree — files here are plain c
 The three tools with real logic have their own detailed `CLAUDE.md` — consult them before editing that tool:
 
 - **`fish/CLAUDE.md`** — Fish shell. Autoloading model (`conf.d` vs `functions` vs `completions`), Bitwarden/vault/recording helpers, and how to reload/lint (`source`, `fish -n`).
-- **`nvim/CLAUDE.md`** — Neovim (Lua + `lazy.nvim`). `init.lua` load order, where the plugin list lives (`lua/lazy-config.lua`), and the LSP architecture (`after/lsp/<server>.lua` overrides, format-on-save).
+- **`nvim/CLAUDE.md`** — Neovim (Lua + built-in `vim.pack`). `init.lua` load order, where the plugin list lives (`lua/pack-config.lua`), the native replacements under `lua/native/` (ui2 messages, LSP completion, inline completion), and the LSP architecture (`after/lsp/<server>.lua` overrides, format-on-save).
 - **`sway/CLAUDE.md`** — Sway WM. The **security-sensitive session-lock chain** (the gocryptfs vault must be re-encrypted on every lock/sleep/logout), the conditional idle guard, kanshi multi-monitor coupling, and clipboard scripts.
 
 The other directories (`foot`, `mako`, `waybar`, `wofi`, `swaylock`, `swappy`, `kanshi`, `qutebrowser`) are mostly static declarative config with no per-tool CLAUDE.md.

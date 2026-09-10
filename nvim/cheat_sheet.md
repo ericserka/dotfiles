@@ -210,26 +210,29 @@ Recommended to use the lua programming language, although I think there are othe
 
 1. inside the folder `~/.config/nvim/`, create a file called `init.lua` with the require of all lua files (plugins or own) created
 2. inside the `~/.config/nvim/lua` folder, create your own lua configuration files
-3. inside the `~/.config/nvim/lua/plugins` folder, create lua plugin configuration files
+3. declare the plugin in `~/.config/nvim/lua/pack-config.lua` (`vim.pack.add`), including its dependencies
+4. inside the `~/.config/nvim/lua/plugins` folder, create lua plugin configuration files
     1. If the plugin doesn't need additional configuration, just put your require inside the `_other-plugin-requires.lua` file
+5. inside the `~/.config/nvim/lua/native` folder, configure built-in features that replaced plugins (messages, completion, inline completion)
 
 ## Updating plugins, parsers and LSP servers
 
-Each layer is managed by a different plugin, and the order matters: `nvim-treesitter` is on the `main` branch, where parser revisions are pinned by the plugin revision, so the plugin has to be updated before its parsers.
+Each layer is managed by a different tool, and the order matters: `nvim-treesitter` is on the `main` branch, where parser revisions are pinned by the plugin revision, so the plugin has to be updated before its parsers.
 
-### 1. Plugins - `:Lazy sync`
+### 1. Plugins - `:lua vim.pack.update()`
 
-Updates every plugin, installs the missing ones, removes the ones dropped from `lazy-config.lua` and rewrites `lazy-lock.json`.
+Plugins are managed by Neovim's built-in `vim.pack` (`lua/pack-config.lua`); revisions are pinned in `nvim-pack-lock.json`.
 
-- `:Lazy sync` updates + installs + cleans in one go
-- `:Lazy update` only updates (no install/clean)
-- `:Lazy` opens the UI, where `S` syncs and `U` updates
+- Missing plugins are installed automatically on the next start
+- `:lua vim.pack.update()` fetches updates and opens a confirmation buffer: `:write` applies, `:quit` discards (`]]`/`[[` jump between plugins, `gO` lists them)
+- `:lua vim.pack.del({ "<name>" })` removes a plugin whose spec was dropped from `pack-config.lua` (there is no automatic clean)
+- `:restart` to run the updated code
 
 ### 2. Treesitter parsers - `:TSUpdate`
 
 - `:TSUpdate` updates all installed parsers
 - `:TSUpdate <lang>` updates a single parser (e.g. `:TSUpdate elixir`)
-- The plugin spec declares `build = ':TSUpdate'`, so lazy.nvim already runs it whenever `nvim-treesitter` itself is updated; running it by hand is just a safety net
+- The `PackChanged` hook in `pack-config.lua` already runs the parser update whenever `nvim-treesitter` itself is installed or updated; running it by hand is just a safety net
 
 ### 3. LSP servers (Mason) - `:Mason` then `U`
 
@@ -247,7 +250,7 @@ Restart Neovim and run `:checkhealth` (`mason`, `nvim-treesitter` and `vim.lsp` 
 ### Headless one-liners
 
 ```sh
-nvim --headless "+Lazy! sync" +qa
+nvim --headless "+lua vim.pack.update(nil, { force = true })" +qa
 nvim --headless -c "lua require('nvim-treesitter.install').update():wait(600000)" -c "qa"
 ```
 
@@ -263,6 +266,44 @@ Macros are like recording a video of your commands:
 4. To play the macro, press `@` followed by the letter you used to record it (e.g., `@a`)
 5. You can repeat the macro multiple times by pressing `@@` or `n@a` (where `n` is the number of times you want to repeat it)
 6. `@@` plays the last executed macro again
+
+## Native features (replaced plugins)
+
+### completion (replaced nvim-cmp)
+
+Built-in LSP completion (`vim.lsp.completion`); the menu opens while typing a word or after a trigger character.
+
+- `CTRL-Space` opens the completion menu on demand
+- `Down`/`Up` (or `CTRL-n`/`CTRL-p`) move through the items
+- `Enter` accepts the highlighted item, or the first one when none is highlighted; otherwise inserts a newline (autopairs/endwise still apply)
+- `CTRL-y` accepts, `CTRL-e` closes the menu
+- `CTRL-j`/`CTRL-k` scroll the documentation popup of the highlighted item
+
+### copilot (replaced copilot.vim)
+
+Ghost-text suggestions come from `copilot-language-server` (installed by Mason) through `vim.lsp.inline_completion`.
+
+- `Tab` accepts the suggestion (plain Tab when there is none)
+- `CTRL-]` dismisses the suggestion
+- `ALT-Right` accepts the next word, `ALT-CTRL-Right` the next line
+- `:LspCopilotSignIn` / `:LspCopilotSignOut` manage the GitHub session (only needed if suggestions never show up)
+
+### messages (replaced noice)
+
+Messages and the cmdline are rendered by the built-in `ui2` with `cmdheight=0`: no permanent bottom row, the cmdline shows up while typing a command, the output of a typed command stays until the next key, and plugin messages are toasts that disappear after 4 seconds (`msg.timeout` in `lua/native/messages.lua`). Long messages collapse with a `[+x]` indicator instead of a hit-enter prompt.
+
+- `g<` (or `Enter` right after a command) shows the collapsed messages in the pager (`q` closes)
+- `<leader>nh` opens the message history, `<leader>nl` shows the last message
+- `<leader>nd` dismisses the messages on screen
+- `<leader>ne` opens the history to look for errors (search `E\d\+`)
+
+### commenting (replaced commentary)
+
+Built-in since Neovim 0.10, based on `commentstring` (treesitter-aware).
+
+- `gcc` comments/uncomments the current line (or `[count]` lines)
+- `gc{motion}` comments/uncomments the lines covered by the motion; `gc` in visual mode does the same for the selection
+- `gcgc` uncomments the whole comment block around the cursor
 
 ## Plugins
 
@@ -408,12 +449,6 @@ Easily install and manage LSP servers, DAP servers, linters, and formatters.
 A plugin that provides a parser generator tool and an incremental parsing library for Vim.
 
 - `TSUpdate all` updates all parsers.
-
-### commentary
-
-A plugin that allows you to comment out code easily.
-
-- `gcc` comments the selected piece of code or the entire line if nothing is selected
 
 ### tree
 
