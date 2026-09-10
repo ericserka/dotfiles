@@ -4,9 +4,6 @@ local cmp = require('cmp')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Git Signs
-require('gitsigns').setup()
-
 local on_attach = function(client, bufnr)
   -- Format on save if documentFormattingProvider
   if client.server_capabilities.documentFormattingProvider and vim.bo.filetype ~= "sql" then
@@ -38,37 +35,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>jp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   vim.keymap.set('n', '<leader>ch',
     '<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })<CR>', opts)
-
-  -- Gitsigns
-  local gs = package.loaded.gitsigns
-
-  local function map(mode, l, r, opt)
-    opt = opt or {}
-    opt.buffer = bufnr
-    vim.keymap.set(mode, l, r, opt)
-  end
-
-  -- -- Next Hunk Navigation
-  map('n', ']c', function()
-    if vim.wo.diff then return ']c' end
-    vim.schedule(function() gs.next_hunk() end)
-    return '<Ignore>'
-  end, { expr = true })
-
-  -- -- Previous Hunk Navigation
-  map('n', '[c', function()
-    if vim.wo.diff then return '[c' end
-    vim.schedule(function() gs.prev_hunk() end)
-    return '<Ignore>'
-  end, { expr = true })
-
-  -- -- Git blame on line
-  gs.toggle_current_line_blame()
-
-  -- -- Actions
-  map('n', '<leader>hu', gs.reset_hunk)
-  map('n', '<leader>hU', gs.reset_buffer)
-  map('n', '<leader>hb', function() gs.blame_line { full = true } end)
 end
 
 
