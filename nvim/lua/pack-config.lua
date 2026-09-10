@@ -56,7 +56,6 @@ vim.pack.add({
   -- Editor actions
   github("nvim-telescope/telescope.nvim"),
   github("nvim-pack/nvim-spectre"),
-  github("tpope/vim-commentary"),
   github("tpope/vim-surround"),
   github("windwp/nvim-autopairs"),
   github("tpope/vim-endwise"),
