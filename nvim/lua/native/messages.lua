@@ -25,12 +25,14 @@ end
 -- "msg" window is the only ui2 window created without an explicit border,
 -- so a border set once is kept across repositioning.
 local levels = vim.log.levels
+-- Icons are Nerd Font glyphs (nvim-notify's defaults), written as escapes
+-- because private-use codepoints do not survive every copy/paste.
 local toast_styles = {
-  [levels.ERROR] = { icon = "", hl = "DiagnosticError" },
-  [levels.WARN] = { icon = "", hl = "DiagnosticWarn" },
-  [levels.INFO] = { icon = "", hl = "DiagnosticInfo" },
-  [levels.DEBUG] = { icon = "", hl = "DiagnosticHint" },
-  [levels.TRACE] = { icon = "✎", hl = "Comment" },
+  [levels.ERROR] = { icon = "\u{f057}", hl = "DiagnosticError" }, -- nf-fa-times_circle
+  [levels.WARN] = { icon = "\u{f071}", hl = "DiagnosticWarn" },   -- nf-fa-warning
+  [levels.INFO] = { icon = "\u{f05a}", hl = "DiagnosticInfo" },   -- nf-fa-info_circle
+  [levels.DEBUG] = { icon = "\u{f188}", hl = "DiagnosticHint" },  -- nf-fa-bug
+  [levels.TRACE] = { icon = "\u{270e}", hl = "Comment" },         -- pencil
 }
 
 vim.api.nvim_create_autocmd("FileType", {
