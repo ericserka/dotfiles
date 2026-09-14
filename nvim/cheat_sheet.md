@@ -290,7 +290,7 @@ Ghost-text suggestions come from `copilot-language-server` (installed by Mason) 
 
 ### messages (replaced noice)
 
-Messages and the cmdline are rendered by the built-in `ui2` with `cmdheight=0`: no permanent bottom row, the cmdline shows up while typing a command, the output of a typed command stays until the next key, and plugin messages are toasts that disappear after 4 seconds (`msg.timeout` in `lua/native/messages.lua`). Long messages collapse with a `[+x]` indicator instead of a hit-enter prompt.
+Messages and the cmdline are rendered by the built-in `ui2` with `cmdheight=0`: no permanent bottom row, the cmdline shows up while typing a command, the output of a typed command stays until the next key, and plugin messages are toasts that disappear after 4 seconds (`msg.timeout` in `lua/native/messages.lua`). `vim.notify` toasts carry an icon, an optional title and a border colored by level (error red, warning yellow, info cyan). Long messages collapse with a `[+x]` indicator instead of a hit-enter prompt.
 
 - `g<` (or `Enter` right after a command) shows the collapsed messages in the pager (`q` closes)
 - `<leader>nh` opens the message history, `<leader>nl` shows the last message

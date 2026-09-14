@@ -20,6 +20,50 @@ if not ok then
   return
 end
 
+-- Toast look, close to what nvim-notify gave noice: a rounded border and, per
+-- level, an icon, a highlighted title and a matching border color. The
+-- "msg" window is the only ui2 window created without an explicit border,
+-- so a border set once is kept across repositioning.
+local levels = vim.log.levels
+local toast_styles = {
+  [levels.ERROR] = { icon = "", hl = "DiagnosticError" },
+  [levels.WARN] = { icon = "", hl = "DiagnosticWarn" },
+  [levels.INFO] = { icon = "", hl = "DiagnosticInfo" },
+  [levels.DEBUG] = { icon = "", hl = "DiagnosticHint" },
+  [levels.TRACE] = { icon = "✎", hl = "Comment" },
+}
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("user_toast_style", { clear = true }),
+  pattern = "msg",
+  desc = "Give the ui2 toast window a rounded border",
+  callback = function()
+    vim.api.nvim_win_set_config(0, { border = "rounded" })
+  end,
+})
+
+local function toast_window()
+  local win = ui2.wins and ui2.wins.msg
+  return win and vim.api.nvim_win_is_valid(win) and win or nil
+end
+
+-- Replaces the default vim.notify: same message kinds and history, plus the
+-- level styling above. Errors keep the ErrorMsg body so :messages marks them.
+vim.notify = function(msg, level, opts)
+  level = level or levels.INFO
+  local style = toast_styles[level] or toast_styles[levels.INFO]
+  local win = toast_window()
+  if win then
+    vim.wo[win].winhighlight = "Search:,CurSearch:,IncSearch:,FloatBorder:" .. style.hl
+  end
+  local chunks = { { style.icon .. " ", style.hl } }
+  if opts and opts.title then
+    table.insert(chunks, { opts.title .. ": ", style.hl })
+  end
+  table.insert(chunks, { tostring(msg) })
+  vim.api.nvim_echo(chunks, true, { err = level == levels.ERROR })
+end
+
 ui2.enable({
   msg = {
     -- Default destination: the ephemeral "msg" window (bottom-right, hidden
