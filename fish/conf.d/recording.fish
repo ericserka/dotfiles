@@ -115,6 +115,27 @@ function rec-setup
     echo "Note: this configuration does not persist after reboot"
 end
 
+# Remove the virtual sink created by rec-setup, so a later rec-setup (e.g. after
+# switching audio devices) starts clean instead of stacking duplicate loopbacks.
+function rec-teardown
+    # Only touch modules created by rec-setup, never other loopbacks or sinks
+    set -l ids (pactl list modules short | string match -r '^\d+\s+module-(?:loopback|null-sink)\s.*\bsink(?:_name)?=virtual-sink\b.*' | string match -rg '^(\d+)')
+
+    if test -z "$ids"
+        echo "No virtual sink loaded, nothing to tear down"
+        return 0
+    end
+
+    for id in $ids
+        pactl unload-module $id
+        or begin
+            echo "Error: could not unload module $id" >&2
+            return 1
+        end
+    end
+    echo "Virtual sink removed"
+end
+
 # Stop recording (alternative to Ctrl+C)
 function rec-stop
     pkill -SIGINT wf-recorder
@@ -140,6 +161,7 @@ function rec-help
     echo "  UTILITIES"
     echo "    rec-sources    - list audio sources"
     echo "    rec-setup      - setup full audio"
+    echo "    rec-teardown   - remove full audio setup"
     echo "    rec-stop       - stop recording"
     echo ""
     echo "Recordings saved to: $RECORD_DIR"
