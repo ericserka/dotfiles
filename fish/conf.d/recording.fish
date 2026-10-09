@@ -23,7 +23,7 @@ function rec-sys
     set filename $RECORD_DIR/(date +%Y-%m-%d_%H-%M-%S).mp4
     set source (pactl get-default-sink).monitor
     echo "Recording to $filename with system audio (Ctrl+C to stop)"
-    wf-recorder -a=$source -f $filename
+    wf-recorder --audio=$source -f $filename
 end
 
 # 3. Fullscreen with microphone audio
@@ -31,7 +31,38 @@ function rec-mic
     set filename $RECORD_DIR/(date +%Y-%m-%d_%H-%M-%S).mp4
     set source (pactl get-default-source)
     echo "Recording to $filename with microphone (Ctrl+C to stop)"
-    wf-recorder -a=$source -f $filename
+    wf-recorder --audio=$source -f $filename
+end
+
+# Run a command (the recorder) with the rec-setup microphone actually live.
+# A Bluetooth headset mic only carries audio in the HFP profile, and WirePlumber
+# switches A2DP -> HFP (and back) only while a real app captures from it: the
+# rec-setup loopback does not count, so the mic would be recorded as silence.
+# Hold a throwaway capture stream on the headset mic for the duration of the
+# command, so WirePlumber switches to HFP and restores A2DP once it is released.
+function __rec_with_headset_mic
+    if not pactl list sinks short | string match -qr '^\d+\svirtual-sink\s'
+        echo "Error: virtual sink not found, run rec-setup first" >&2
+        return 1
+    end
+
+    # The mic loopback created by rec-setup tells which headset is in use
+    set -l mic (pactl list modules short | string match -rg '^\d+\s+module-loopback\s+source=(bluez_input\.\S+)\s+sink=virtual-sink\b')
+    if test -z "$mic"
+        # Not a Bluetooth mic: nothing to hold
+        $argv
+        return
+    end
+
+    pw-record --target $mic[1] -P '{ node.name = "rec-mic-hold" }' /dev/null &
+    set -l hold $last_pid
+    echo "Headset mic in use: call-quality audio (HFP) until the recording stops"
+
+    $argv
+    set -l result $status
+
+    kill $hold 2>/dev/null
+    return $result
 end
 
 # 4. Fullscreen with full audio (system + microphone)
@@ -39,7 +70,7 @@ function rec-full
     set filename $RECORD_DIR/(date +%Y-%m-%d_%H-%M-%S).mp4
     echo "Recording to $filename with full audio (Ctrl+C to stop)"
     echo "Note: requires virtual sink setup (see rec-setup)"
-    wf-recorder -a=virtual-sink.monitor -f $filename
+    __rec_with_headset_mic wf-recorder --audio=virtual-sink.monitor -f $filename
 end
 
 # ========== SELECTED REGION ==========
@@ -61,7 +92,7 @@ function rec-region-sys
     set source (pactl get-default-sink).monitor
     if test -n "$geometry"
         echo "Recording to $filename with system audio (Ctrl+C to stop)"
-        wf-recorder -g "$geometry" -a=$source -f $filename
+        wf-recorder -g "$geometry" --audio=$source -f $filename
     end
 end
 
@@ -72,7 +103,7 @@ function rec-region-mic
     set source (pactl get-default-source)
     if test -n "$geometry"
         echo "Recording to $filename with microphone (Ctrl+C to stop)"
-        wf-recorder -g "$geometry" -a=$source -f $filename
+        wf-recorder -g "$geometry" --audio=$source -f $filename
     end
 end
 
@@ -82,7 +113,7 @@ function rec-region-full
     set geometry (slurp)
     if test -n "$geometry"
         echo "Recording to $filename with full audio (Ctrl+C to stop)"
-        wf-recorder -g "$geometry" -a=virtual-sink.monitor -f $filename
+        __rec_with_headset_mic wf-recorder -g "$geometry" --audio=virtual-sink.monitor -f $filename
     end
 end
 
@@ -118,6 +149,10 @@ end
 # Remove the virtual sink created by rec-setup, so a later rec-setup (e.g. after
 # switching audio devices) starts clean instead of stacking duplicate loopbacks.
 function rec-teardown
+    # Safety net: release a mic hold left behind by an interrupted recording,
+    # which would otherwise keep a Bluetooth headset stuck in HFP
+    pkill -f rec-mic-hold
+
     # Only touch modules created by rec-setup, never other loopbacks or sinks
     set -l ids (pactl list modules short | string match -r '^\d+\s+module-(?:loopback|null-sink)\s.*\bsink(?:_name)?=virtual-sink\b.*' | string match -rg '^(\d+)')
 
