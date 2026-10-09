@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Eric's personal dotfiles for an **Arch Linux + Sway (Wayland)** machine. Each top-level directory is one application's config and mirrors its live location under `$HOME`:
 
-- `<tool>/` → `~/.config/<tool>/` for `fish`, `nvim`, `sway`, `foot`, `kanshi`, `mako`, `qutebrowser`, `swappy`, `swaylock`, `waybar`, `wofi`, `systemd`.
+- `<tool>/` → `~/.config/<tool>/` for `fish`, `nvim`, `sway`, `foot`, `kanshi`, `mako`, `qutebrowser`, `swappy`, `swaylock`, `waybar`, `wofi`, `systemd`, `wireplumber`.
 - Root files map into `$HOME` directly: `.wezterm.lua` → `~/.wezterm.lua`, `rofimoji.rc` → `~/.config/rofimoji.rc`, `mimeapps.list` → `~/.config/mimeapps.list`.
 
 The repo is a **versioned mirror**, not the live tree — files here are plain copies of what lives under `~/.config` (not symlinks, and there is no stow/chezmoi/install script). Editing a file here does **not** change running programs until the same file is in place under `~/.config`; the per-tool testing instructions below all operate on the `~/.config` copy. There is no build system and no automated tests anywhere in this repo — verification is always running the affected program by hand.
@@ -19,7 +19,7 @@ The three tools with real logic have their own detailed `CLAUDE.md` — consult 
 - **`nvim/CLAUDE.md`** — Neovim (Lua + built-in `vim.pack`). `init.lua` load order, where the plugin list lives (`lua/pack-config.lua`), the native replacements under `lua/native/` (ui2 messages, LSP completion, inline completion), and the LSP architecture (`after/lsp/<server>.lua` overrides, format-on-save).
 - **`sway/CLAUDE.md`** — Sway WM. The **security-sensitive session-lock chain** (the gocryptfs vault must be re-encrypted on every lock/sleep/logout), the conditional idle guard, kanshi multi-monitor coupling, and clipboard scripts.
 
-The other directories (`foot`, `mako`, `waybar`, `wofi`, `swaylock`, `swappy`, `kanshi`, `qutebrowser`) are mostly static declarative config with no per-tool CLAUDE.md.
+The other directories (`foot`, `mako`, `waybar`, `wofi`, `swaylock`, `swappy`, `kanshi`, `qutebrowser`, `wireplumber`) are mostly static declarative config with no per-tool CLAUDE.md.
 
 ## Cross-cutting architecture
 
