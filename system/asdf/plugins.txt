@@ -1,0 +1,11 @@
+awscli https://github.com/MetricMike/asdf-awscli.git
+delta https://github.com/andweeb/asdf-delta.git
+elixir https://github.com/asdf-vm/asdf-elixir.git
+erlang https://github.com/asdf-vm/asdf-erlang.git
+lazygit https://github.com/nklmilojevic/asdf-lazygit.git
+neovim https://github.com/richin13/asdf-neovim.git
+nodejs https://github.com/asdf-vm/asdf-nodejs.git
+python https://github.com/asdf-community/asdf-python.git
+redis https://github.com/smashedtoatoms/asdf-redis.git
+typst https://github.com/stephane-klein/asdf-typst.git
+zig https://github.com/asdf-community/asdf-zig.git
