@@ -58,6 +58,7 @@ output * bg /usr/share/backgrounds/vice-city-grand-3840x2160-24218.png fill
    input type:keyboard {
        xkb_layout "br"
        xkb_variant "abnt2"
+       xkb_numlock enabled
    }
 #
 # You can also configure each device individually.
