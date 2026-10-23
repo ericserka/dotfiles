@@ -4,6 +4,7 @@ bluez
 bluez-utils
 brightnessctl
 cliphist
+direnv
 efibootmgr
 evince
 fish
@@ -62,5 +63,6 @@ wl-clipboard
 wofi
 wtype
 xdg-desktop-portal-wlr
+xournalpp
 yt-dlp
 zip
